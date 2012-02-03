@@ -1,0 +1,7 @@
+<launch>
+    <node pkg="gavlab_atrv_node" type="atrv_node" name="atrv_node"
+          output="screen" required="true">
+    <param name="front_port" value="/dev/tty.USA49Wfd122P2.2" />
+    <param name="rear_port" value="/dev/tty.USA49Wfd122P1.1" />
+    </node>
+</launch>

@@ -1,0 +1,15 @@
+<package>
+  <description brief="gavlab_atrv_description">
+
+     gavlab_atrv_description
+
+  </description>
+  <author>William Woodall</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/gavlab_atrv_description</url>
+  <depend package="urdf"/>
+
+</package>
+
+
