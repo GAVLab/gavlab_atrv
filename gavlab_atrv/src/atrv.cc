@@ -52,6 +52,7 @@ void
 ATRV::connect(std::string port1, std::string port2,
               size_t watchdog, bool echo)
 {
+  boost::mutex::scoped_lock lock(move_mux);
   // Connect to both motor controllers, parallelize to speed up
   front_mc_error_ = "";
   rear_mc_error_ = "";
@@ -77,8 +78,9 @@ ATRV::connect(std::string port1, std::string port2,
 
 void
 ATRV::disconnect() {
-  front_mc_error_ = "";
-  rear_mc_error_ = "";
+  boost::mutex::scoped_lock lock(move_mux);
+  front_mc_error_ = std::string("");
+  rear_mc_error_ = std::string("");
   boost::thread t1(boost::bind(&ATRV::disconnect_, this, 1));
   boost::thread t2(boost::bind(&ATRV::disconnect_, this, 2));
   t1.join();
