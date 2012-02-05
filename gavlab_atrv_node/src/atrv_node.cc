@@ -90,7 +90,7 @@ public:
         ROS_INFO("Connecting to ATRV with front_port: %s, and rear_port: %s",
                  this->front_port.c_str(), this->rear_port.c_str());
         this->setupATRV();
-        this->atrv_->connect(this->front_port, this->rear_port, 250, false);
+        this->atrv_->connect(this->front_port, this->rear_port, 250, true);
         this->connected = true;
       } catch (const std::exception& e) {
         std::string e_msg(e.what());
@@ -126,8 +126,12 @@ public:
         this->atrv_->move(this->linear_vel, this->angular_vel);
       } catch (std::exception& e) {
         std::string e_msg(e.what());
-        ROS_ERROR("Error commanding ATRV: %s", e_msg.c_str());
-        this->disconnect();
+        if (e_msg.find("Failed to get !M") != std::string::npos) {
+          ROS_WARN("Error commanding ATRV: %s", e_msg.c_str());
+        } else {
+          ROS_ERROR("Error commanding ATRV: %s", e_msg.c_str());
+          this->disconnect();
+        }
       }
     }
   }
@@ -238,8 +242,13 @@ private:
 
   void
   handleExceptions(const std::exception &error) {
-    ROS_ERROR("ATRV: %s", error.what());
-    this->disconnect();
+    std::string e_msg(error.what());
+    if (e_msg.find("Failed to decode") != std::string::npos) {
+      ROS_WARN("ATRV: %s", error.what());
+    } else {
+      ROS_ERROR("ATRV: %s", error.what());
+      this->disconnect();
+    }
   }
 
   void setupATRV() {
