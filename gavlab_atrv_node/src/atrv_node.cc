@@ -55,6 +55,7 @@ public:
     this->odometry_x = 0.0;
     this->odometry_y = 0.0;
     this->odometry_w = 0.0;
+    this->atrv_ = NULL;
   }
 
   ~ATRVNode() {
@@ -62,9 +63,10 @@ public:
   }
 
   void disconnect() {
-    this->atrv_->disconnect();
-    delete this->atrv_;
-    this->atrv_ = NULL;
+    if (this->atrv_ != NULL) {
+      delete this->atrv_;
+      this->atrv_ = NULL;
+    }
     this->connected = false;
   }
 
