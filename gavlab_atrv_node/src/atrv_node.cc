@@ -90,7 +90,7 @@ public:
         ROS_INFO("Connecting to ATRV with front_port: %s, and rear_port: %s",
                  this->front_port.c_str(), this->rear_port.c_str());
         this->setupATRV();
-        this->atrv_->connect(this->front_port, this->rear_port, 250, true);
+        this->atrv_->connect(this->front_port, this->rear_port, 250, false);
         this->connected = true;
       } catch (const std::exception& e) {
         std::string e_msg(e.what());
@@ -124,6 +124,7 @@ public:
       boost::mutex::scoped_lock lock(this->m_mutex);
       try {
         this->atrv_->move(this->linear_vel, this->angular_vel);
+        ROS_INFO("Commanded Motor Successfully!");
       } catch (std::exception& e) {
         std::string e_msg(e.what());
         if (e_msg.find("Failed to get !M") != std::string::npos) {
