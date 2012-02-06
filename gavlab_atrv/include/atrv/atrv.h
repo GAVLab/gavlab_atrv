@@ -185,11 +185,11 @@ public:
   /*!
    * Moves the ATRV.
    * 
-   * \params linear_velocity ssize_t value for linear velocity in m/s
+   * \params linear_velocity double value for linear velocity in m/s
    * 
-   * \params angular_velocity ssize_t value for angular velocity in rad/s
+   * \params angular_velocity double value for angular velocity in rad/s
    */
-  void move(ssize_t linear_velocity=0, ssize_t angular_velocity=0);
+  void move(double linear_velocity=0.0f, double angular_velocity=0.0f);
 
   /*!
    * Sets the function to be called when new telemetry is available.

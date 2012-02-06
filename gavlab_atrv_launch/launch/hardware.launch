@@ -1,11 +1,15 @@
 <launch>
-    <!-- Start the static transformations -->
-    <include file="$(find gavlab_atrv_launch)/launch/transforms.xml"/>
-    
-    <!-- Start the node that interfaces with the motor controllers -->
-    <node pkg="gavlab_atrv_node" type="atrv_node" name="atrv_node"
-          output="screen" required="true">
-        <param name="front_port" value="/dev/atrv_front_wheels" />
-        <param name="rear_port" value="/dev/atrv_rear_wheels" />
-    </node>
+  <!-- Arguments -->
+  <arg name="front_port" default="/dev/atrv_front_wheels" />
+  <arg name="rear_port" default="/dev/atrv_rear_wheels" />
+
+  <!-- Start the static transformations -->
+  <include file="$(find gavlab_atrv_launch)/launch/transforms.xml"/>
+  
+  <!-- Start the node that interfaces with the motor controllers -->
+  <node pkg="gavlab_atrv_node" type="atrv_node" name="atrv_node"
+        output="screen" required="true">
+    <param name="front_port" value="$(arg front_port)" />
+    <param name="rear_port" value="$(arg rear_port)" />
+  </node>
 </launch>

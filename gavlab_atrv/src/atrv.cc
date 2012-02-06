@@ -90,7 +90,7 @@ ATRV::disconnect() {
 }
 
 void
-ATRV::move(ssize_t linear_velocity, ssize_t angular_velocity) {
+ATRV::move(double linear_velocity, double angular_velocity) {
   // Calculate the required wheel velocities in rpm
   double lws, rws;
   lws = 2 * linear_velocity;

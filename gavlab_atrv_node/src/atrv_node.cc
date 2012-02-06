@@ -124,7 +124,7 @@ public:
       boost::mutex::scoped_lock lock(this->m_mutex);
       try {
         this->atrv_->move(this->linear_vel, this->angular_vel);
-        ROS_INFO("Commanded Motor Successfully!");
+        // ROS_INFO("Commanded Motor Successfully!");
       } catch (std::exception& e) {
         std::string e_msg(e.what());
         if (e_msg.find("Failed to get !M") != std::string::npos) {
@@ -138,6 +138,7 @@ public:
   }
 
   void motor_timeoutCallback(const ros::TimerEvent& e) {
+    ROS_WARN("Motor command timeout, stopping!");
     boost::mutex::scoped_lock lock(m_mutex);
     this->linear_vel = 0.0;
     this->angular_vel = 0.0;
@@ -148,6 +149,7 @@ public:
       return;
     boost::mutex::scoped_lock lock(m_mutex);
     double x = msg->linear.x, z = msg->angular.z;
+    // ROS_INFO("Command motor to: %f, %f", x, z);
     this->linear_vel = x;
     this->angular_vel = z;
     this->motor_timeout_timer =
