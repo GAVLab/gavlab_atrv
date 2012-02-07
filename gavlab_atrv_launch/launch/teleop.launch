@@ -1,7 +1,9 @@
 <launch>
   <!-- Start the joy stick interface node -->
   <node pkg="joy" type="joy_node" name="joy_node" output="screen" 
-        required="true" />
+        required="true">
+    <param name="autorepeat_rate" value="5" type="double" />
+  </node>
 
   <!-- Start the node that converts joy messages to cmd_vel's -->
   <node pkg="joy_to_twist" type="joy_to_twist.py" name="atrv_joy_to_twist"
