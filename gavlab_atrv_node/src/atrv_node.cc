@@ -105,6 +105,7 @@ public:
           ros::Duration(0.1).sleep();
         }
       }
+      this->disconnect();
       if (ros::ok()) {
         // ROS is OK, but we aren't connected, wait then try again
         ROS_WARN("Not connected to the ATRV, will retry in "
@@ -127,11 +128,13 @@ public:
         // ROS_INFO("Commanded Motor Successfully!");
       } catch (std::exception& e) {
         std::string e_msg(e.what());
-        if (e_msg.find("Failed to get !M") != std::string::npos) {
+        if (e_msg.find("Failed to get !M") != std::string::npos
+         || e_msg.find("received a non-a") != std::string::npos)
+        {
           ROS_WARN("Error commanding ATRV: %s", e_msg.c_str());
         } else {
           ROS_ERROR("Error commanding ATRV: %s", e_msg.c_str());
-          this->disconnect();
+          this->connected = false;
         }
       }
     }
@@ -250,7 +253,7 @@ private:
       ROS_WARN("ATRV: %s", error.what());
     } else {
       ROS_ERROR("ATRV: %s", error.what());
-      this->disconnect();
+      this->connected = false;
     }
   }
 

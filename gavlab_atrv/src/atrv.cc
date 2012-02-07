@@ -42,6 +42,8 @@ ATRV::ATRV() {
   wheel_radius_ = 0.203; // meters
   max_rpm_ = 3000; // rpm
   encoder_ppr_ = 1000; // ppr
+
+  this->connected = false;
 }
 
 ATRV::~ATRV() {
@@ -73,10 +75,13 @@ ATRV::connect(std::string port1, std::string port2,
                                                     this, 1, _1));
   rear_mc_.setTelemetry(telem, period, boost::bind(&ATRV::parse_telemetry_,
                                                    this, 2, _1));
+  this->connected = true;
 }
 
 void
 ATRV::disconnect() {
+  this->connected = false;
+  boost::mutex::scoped_lock lock(move_mux);
   front_mc_error_ = std::string("");
   rear_mc_error_ = std::string("");
   boost::thread t1(boost::bind(&ATRV::disconnect_, this, 1));
@@ -91,6 +96,9 @@ ATRV::disconnect() {
 
 void
 ATRV::move(double linear_velocity, double angular_velocity) {
+  if (!this->connected) {
+    return;
+  }
   // Calculate the required wheel velocities in rpm
   double lws, rws;
   lws = 2 * linear_velocity;

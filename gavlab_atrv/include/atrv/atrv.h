@@ -302,6 +302,7 @@ private:
   ssize_t left_wheel_effort_, right_wheel_effort_;
 
   // Move thread safety
+  bool connected;
   boost::mutex move_mux;
 
 };
