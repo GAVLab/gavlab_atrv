@@ -187,7 +187,9 @@ private:
   {
     ros::Time now = ros::Time::now();
     using namespace mdc2250::queries;
-    if (query_type != encoder_count_absolute || telemetry.size() != 2) {
+    if ((query_type != encoder_count_absolute
+         && query_type != encoder_count_relative)
+      || telemetry.size() != 2) {
       return;
     }
     // How long has it been?
@@ -265,11 +267,14 @@ private:
     // Setup telemetry
     using namespace mdc2250::queries;
     this->atrv_->setTelemetryCallback(boost::bind(&ATRVNode::encoderCallback,
-                                                 this, _1, _2, _3),
+                                                  this, _1, _2, _3),
                                      encoder_count_absolute);
-    this->atrv_->setTelemetryCallback(boost::bind(&ATRVNode::telemetryCallback,
-                                                 this, _1, _2, _3),
-                                     any_query);
+    this->atrv_->setTelemetryCallback(boost::bind(&ATRVNode::encoderCallback,
+                                                  this, _1, _2, _3),
+                                      encoder_count_relative);
+    this->atrv_->setTelemetryCallback(
+                  boost::bind(&ATRVNode::telemetryCallback, this, _1, _2, _3),
+                  any_query);
     // Replace the info callback
     this->atrv_->setInfoHandler(handleInfoMessages);
     this->atrv_->setExceptionHandler(boost::bind(&ATRVNode::handleExceptions,

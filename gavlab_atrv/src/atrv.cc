@@ -58,23 +58,15 @@ ATRV::connect(std::string port1, std::string port2,
   front_mc_error_ = "";
   rear_mc_error_ = "";
   boost::thread t1(
-    boost::bind(&ATRV::connect_, this, 1, port1, watchdog, echo));
+    boost::bind(&ATRV::connect_, this, &front_mc_, 1, port1, watchdog, echo));
   boost::thread t2(
-    boost::bind(&ATRV::connect_, this, 2, port2, watchdog, echo));
+    boost::bind(&ATRV::connect_, this, &rear_mc_, 2, port2, watchdog, echo));
   t1.join();
   t2.join();
   if (!front_mc_error_.empty())
     throw(ConnectionFailedException("Front mdc2250: "+front_mc_error_));
   if (!rear_mc_error_.empty())
     throw(ConnectionFailedException("Rear mdc2250: "+rear_mc_error_));
-
-  // Setup telemetry
-  std::string telem = "C,FF,C,V,C,BA,C,T,C,A";
-  size_t period = 10;
-  front_mc_.setTelemetry(telem, period, boost::bind(&ATRV::parse_telemetry_,
-                                                    this, 1, _1));
-  rear_mc_.setTelemetry(telem, period, boost::bind(&ATRV::parse_telemetry_,
-                                                   this, 2, _1));
   this->connected = true;
 }
 
@@ -129,22 +121,53 @@ ATRV::setTelemetryCallback (TelemetryCallback telemetry_callback,
 }
 
 void
-ATRV::connect_(size_t mc_index, const std::string &port, size_t wd, bool echo)
+ATRV::connect_(MDC2250 *mc, size_t i, const std::string &port,
+               size_t wd, bool echo)
 {
-  if (mc_index == 1) {
-    try {
-      front_mc_.connect(port, wd, echo);
-    } catch (const std::exception &e) {
-      front_mc_error_ = e.what();
-    }
-  } else if (mc_index == 2) {
-    try {
-      rear_mc_.connect(port, wd, echo);
-    } catch (const std::exception &e) {
-      rear_mc_error_ = e.what();
-    }
-  } else {
+  if (i != 1 && i != 2) {
     front_mc_error_ = "Invalid mc_index, must be 1 or 2.";
+    return;
+  }
+  std::string error_str = "";
+  try {
+    mc->connect(port, wd, echo);
+    // Setup telemetry
+    std::string telem = "C,FF,C,V,C,BA,C,T,C,A";
+    // std::string telem = "CR,FF,CR,V,CR,BA,CR,T,CR,A";
+    size_t period = 10;
+    mc->setTelemetry(telem, period,
+                    boost::bind(&ATRV::parse_telemetry_,this,i,_1));
+    // Setup encoder ppr
+    std::string fail_why = "";
+    std::stringstream cmd;
+    cmd << "^EPPR 1" << this->encoder_ppr_;
+    if (error_str.empty() && mc->issueCommand(cmd.str(), fail_why)) {
+      error_str = fail_why;
+    }
+    cmd.str("^EPPR 2");
+    cmd << this->encoder_ppr_;
+    if (error_str.empty() && mc->issueCommand(cmd.str(), fail_why)) {
+      error_str = fail_why;
+    }
+    // Setup max rpm
+    cmd.str("^MRPM 1");
+    cmd << this->max_rpm_;
+    if (error_str.empty() && mc->issueCommand(cmd.str(), fail_why)) {
+      error_str = fail_why;
+    }
+    cmd.str("^MRPM 2");
+    cmd << this->max_rpm_;
+    if (error_str.empty() && mc->issueCommand(cmd.str(), fail_why)) {
+      error_str = fail_why;
+    }
+  } catch (const std::exception &e) {
+    error_str = e.what();
+  }
+  if (!error_str.empty() && i == 1) {
+    front_mc_error_ = error_str;
+  }
+  if (!error_str.empty() && i == 2) {
+    rear_mc_error_ = error_str;
   }
 }
 

@@ -286,7 +286,7 @@ private:
   mdc2250::MDC2250 front_mc_, rear_mc_;
   // Concurrent connecting variables
   std::string front_mc_error_, rear_mc_error_;
-  void connect_(size_t mc_index, const std::string &port,
+  void connect_(mdc2250::MDC2250 *mc, size_t i, const std::string &port,
                 size_t wd, bool echo);
   void disconnect_(size_t mc_index);
 

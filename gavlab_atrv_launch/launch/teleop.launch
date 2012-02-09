@@ -9,7 +9,7 @@
   <node pkg="joy_to_twist" type="joy_to_twist.py" name="atrv_joy_to_twist"
         output="screen" required="true">
     <param name="max_linear_vel" type="double" value="1.0" />
-    <param name="max_angular_vel" type="double" value="0.2" />
+    <param name="max_angular_vel" type="double" value="1.0" />
     <remap from="cmd_vel" to="atrv_node/cmd_vel" />
   </node>
 </launch>
