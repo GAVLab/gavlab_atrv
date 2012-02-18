@@ -27,10 +27,10 @@
 
 #include <boost/thread.hpp>
 
-#include "ros/ros.h"
+#include <ros/ros.h>
 #include <tf/transform_broadcaster.h>
-#include "geometry_msgs/Twist.h"
-#include "nav_msgs/Odometry.h"
+#include <geometry_msgs/Twist.h>
+#include <nav_msgs/Odometry.h>
 
 #include "gavlab_atrv_node/StampedEncoders.h"
 
@@ -54,7 +54,7 @@ public:
     this->first_odometry = true;
     this->odometry_x = 0.0;
     this->odometry_y = 0.0;
-    this->odometry_w = 0.0;
+    this->odometry_theta = 0.0;
     this->atrv_ = NULL;
   }
 
@@ -190,11 +190,9 @@ private:
     if ((query_type != encoder_count_absolute
          && query_type != encoder_count_relative)
       || telemetry.size() != 2) {
+      ROS_WARN("Inavlid encoder callback.");
       return;
     }
-    // How long has it been?
-    // double delta_t = 1.0/50.0;
-    double delta_t = (now-this->last_time_).toSec();
 
     // Publish encoder data
     if (motor_index == 1) {
@@ -214,36 +212,53 @@ private:
       return;
     }
 
-    return; // Odom is not complete
+    // return; // Odom is not complete
 
-    // Store time for next iteration
-    this->last_time_ = now;
-    // Is this the encoder data?
-    if (this->first_odometry) {
-      this->first_odometry = false;
-      this->lwc_ = telemetry[0];
-      this->rwc_ = telemetry[1];
-      this->last_time_ = now;
-      return;
+    // Is this the first set of encoder data?
+    double previous_x = this->odometry_x;
+    double previous_y = this->odometry_y;
+    double previous_theta = this->odometry_theta;
+    // How long has it been?
+    // double delta_t = 1.0/50.0;
+    double delta_time = (now-this->last_time_).toSec();
+    if (!this->first_odometry) {
+      // Calculate change in encoders
+      long delta_lwc = telemetry[0] - this->lwc_;
+      long delta_rwc = telemetry[1] - this->rwc_;
+      // Update positions
+      this->atrv_->calculateOdometry(delta_lwc, delta_rwc, delta_time,
+                                     this->odometry_x, this->odometry_y,
+                                     this->odometry_theta);
     }
-    // Gear ratio of 11 to 1
-    double lws = (telemetry[0] - this->lwc_) / 11.0;
-    double rws = (telemetry[1] - this->rwc_) / 11.0;
-    // Set previous telemetry for the next go around
+
+    // Update the Odometry Msg
+    this->odom_msg.header.stamp = now;
+    this->odom_msg.pose.pose.position.x = this->odometry_x;
+    this->odom_msg.pose.pose.position.y = this->odometry_y;
+    this->odom_msg.pose.pose.position.z = 0.0f;
+    this->odom_msg.pose.pose.orientation =
+      tf::createQuaternionMsgFromYaw(this->odometry_theta);
+    this->odom_msg.twist.twist.linear.x =
+      (this->odometry_x - previous_x)/delta_time;
+    this->odom_msg.twist.twist.linear.y =
+      (this->odometry_y - previous_y)/delta_time;
+    this->odom_msg.twist.twist.linear.z = 0.0f;
+    this->odom_msg.twist.twist.angular.z =
+      (this->odometry_theta - previous_theta)/delta_time;
+    // Publish the odometry msg
+    this->odom_pub.publish(this->odom_msg);
+
+    // Store values for next time
+    this->first_odometry = false;
     this->lwc_ = telemetry[0];
     this->rwc_ = telemetry[1];
-
-    // Calculate the revolutions per second
-    lws /= delta_t;
-    rws /= delta_t;
-    // Use vehicle geometry to calculate delta position
-    
+    this->last_time_ = now;
   }
 
   void
   telemetryCallback(size_t motor_index,
-                  const mdc2250::queries::QueryType &query_type,
-                  std::vector<long> &telemetry)
+                    const mdc2250::queries::QueryType &query_type,
+                    std::vector<long> &telemetry)
   {
     return;
   }
@@ -326,9 +341,9 @@ private:
 
   bool first_odometry;
   long lwc_, rwc_;
-  float odometry_x;
-  float odometry_y;
-  float odometry_w;
+  double odometry_x;
+  double odometry_y;
+  double odometry_theta;
   ros::Time last_time_;
 
   boost::mutex m_mutex;

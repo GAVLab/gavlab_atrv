@@ -120,6 +120,36 @@ ATRV::setTelemetryCallback (TelemetryCallback telemetry_callback,
   telemetry_cb_map_[query_type] = telemetry_callback;
 }
 
+bool
+ATRV::calculateOdometry(long &encoder1, long &encoder2, double &delta_time,
+                        double &x, double &y, double &theta)
+{
+  // Divide the relative encoder counts by 11 for the gear ratio
+  double left_wheel_speed = encoder1 / 11.0f;
+  double right_wheel_speed = encoder2 / 11.0f;
+  // Calculate the wheel speed from the delta_time
+  left_wheel_speed /= delta_time;
+  right_wheel_speed /= delta_time;
+  // Divide by 1000 to convert from encoder_ticks_per_second to rps
+  left_wheel_speed /= 1000.0f;
+  right_wheel_speed /= 1000.0f;
+  // Convert rps to mps for each wheel
+  double wheel_circumference = this->wheel_radius_*2.0*M_PI;
+  left_wheel_speed *= wheel_circumference;
+  right_wheel_speed *= wheel_circumference;
+  // Calculate new positions
+  double velocity = 0.0f;
+  velocity += this->wheel_radius_/2.0f * right_wheel_speed;
+  velocity += this->wheel_radius_/2.0f * left_wheel_speed;
+  double angular_velocity = 0.0f;
+  angular_velocity += this->wheel_radius_/this->track_width_ * left_wheel_speed;
+  angular_velocity -= this->wheel_radius_/this->track_width_ * right_wheel_speed;
+  x += delta_time * velocity * cos(theta + (angular_velocity/2.0f) * delta_time);
+  y += delta_time * velocity * sin(theta + (angular_velocity/2.0f) * delta_time);
+  theta += angular_velocity * delta_time;
+  return true;
+}
+
 void
 ATRV::connect_(MDC2250 *mc, size_t i, const std::string &port,
                size_t wd, bool echo)

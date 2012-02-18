@@ -273,9 +273,13 @@ public:
     this->handle_exc = exception_handler;
   }
 
-  // Vehicle geometry
-  double track_width_, wheel_radius_;
-  size_t max_rpm_, encoder_ppr_;
+  /*!
+   * Takes relative encoder counts, delta time, and modifies the total x, y,
+   * and omega of the robot.
+   */
+  bool
+  calculateOdometry (long &encoder1, long &encoder2, double &delta_time,
+                     double &x, double &y, double &theta);
 
 private:
   // Exception callback handle
@@ -298,8 +302,12 @@ private:
   void info_cb_(const std::string &msg, size_t mc_index);
   void exc_cb_(const std::exception &error, size_t mc_index);
 
-  // Motor controll
+  // Motor control
   ssize_t left_wheel_effort_, right_wheel_effort_;
+
+  // Vehicle geometry
+  double track_width_, wheel_radius_;
+  size_t max_rpm_, encoder_ppr_;
 
   // Move thread safety
   bool connected;
