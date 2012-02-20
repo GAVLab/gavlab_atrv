@@ -134,16 +134,18 @@ ATRV::calculateOdometry(long &encoder1, long &encoder2, double &delta_time,
   left_wheel_speed /= 1000.0f;
   right_wheel_speed /= 1000.0f;
   // Convert rps to mps for each wheel
-  double wheel_circumference = this->wheel_radius_*2.0*M_PI;
+  double wheel_circumference = this->wheel_radius_ * 2.0f * M_PI;
   left_wheel_speed *= wheel_circumference;
   right_wheel_speed *= wheel_circumference;
-  // Calculate new positions
+  // Calculate velocities
   double velocity = 0.0f;
-  velocity += this->wheel_radius_/2.0f * right_wheel_speed;
-  velocity += this->wheel_radius_/2.0f * left_wheel_speed;
+  velocity += this->wheel_radius_ * right_wheel_speed;
+  velocity += this->wheel_radius_ * left_wheel_speed;
+  velocity /= 2.0f;
   double angular_velocity = 0.0f;
   angular_velocity += this->wheel_radius_/this->track_width_ * left_wheel_speed;
   angular_velocity -= this->wheel_radius_/this->track_width_ * right_wheel_speed;
+  // Calculate new positions
   x += delta_time * velocity * cos(theta + (angular_velocity/2.0f) * delta_time);
   y += delta_time * velocity * sin(theta + (angular_velocity/2.0f) * delta_time);
   theta += angular_velocity * delta_time;
