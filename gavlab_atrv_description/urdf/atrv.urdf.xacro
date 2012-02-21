@@ -25,6 +25,7 @@
   <!-- This is not including equipment and racks on the top -->
   <xacro:property name="chassis_height" value="0.50" />
   <xacro:property name="wheel_radius" value="0.20"/>
+  <xacro:property name="wheel_width" value="0.15"/>
 
 <!-- xacro macros -->
   <xacro:macro name="default_inertial" params="mass">
@@ -78,17 +79,17 @@
       <xacro:default_inertial mass="1"/>
 
       <visual>
-        <origin xyz="0 0 ${0.25/2}" rpy="0 0 0" />
+        <origin xyz="0 0 ${wheel_width/2}" rpy="0 0 0" />
         <geometry>
-          <cylinder radius="${wheel_radius}" length="0.25"/>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
         </geometry>
         <material name="Black"/>
       </visual>
 
       <collision>
-        <origin xyz="0 0 ${0.25/2}" rpy="0 0 0" />
+        <origin xyz="0 0 ${wheel_width/2}" rpy="0 0 0" />
         <geometry>
-          <cylinder radius="${wheel_radius}" length="0.25"/>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
         </geometry>
       </collision>
     </link>
@@ -110,6 +111,35 @@
   <xacro:wheel prefix="right_front" reflect_x="1" reflect_y="-1" />
   <!-- right_rear_wheel_link -->
   <xacro:wheel prefix="right_rear" reflect_x="-1" reflect_y="-1" />
+
+  <!-- laser_link -->
+  <xacro:property name="laser_radius" value="0.045"/>
+  <xacro:property name="laser_height" value="0.16"/>
+  <link name="laser_link">
+    <xacro:default_inertial mass="3"/>
+
+    <visual>
+      <origin xyz="0 0 ${0.04-laser_height/2.0}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${laser_radius}" length="${laser_height}"/>
+      </geometry>
+      <material name="Grey"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 ${0.04-laser_height/2.0}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${laser_radius}" length="${laser_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- base_link -> laser_link -->
+  <joint name="base_laser_joint" type="fixed">
+    <origin xyz="${0.015+laser_radius+chassis_length/2.0} 0 ${0.28-ground_clearance}" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="laser_link"/>
+  </joint>
 
   <!-- kinect_link -->
   <link name="kinect_link">
