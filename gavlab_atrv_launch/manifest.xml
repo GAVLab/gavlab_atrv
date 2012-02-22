@@ -8,7 +8,12 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/gavlab_atrv_launch</url>
-  <depend package="gavlab_atrv"/>
+  <depend package="gavlab_atrv_node"/>
+  <depend package="LMS1xx"/>
+  <depend package="nodelet"/>
+  <depend package="openni_camera"/>
+  <depend package="throttle_pointcloud"/>
+  <depend package="urdf"/>
   <depend package="tf"/>
   <depend package="joy"/>
 

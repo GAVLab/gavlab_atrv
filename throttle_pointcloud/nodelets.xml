@@ -1,0 +1,7 @@
+<library path="lib/libcloud_throttle">
+  <class name="throttle_pointcloud/CloudThrottle" type="throttle_pointcloud::CloudThrottle" base_class_type="nodelet::Nodelet">
+    <description>
+      Throttle point clouds
+    </description>
+  </class>
+</library>
