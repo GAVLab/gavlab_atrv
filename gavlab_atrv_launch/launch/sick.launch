@@ -1,0 +1,8 @@
+<launch>
+  <!-- Start the static transformations -->
+  <include file="$(find gavlab_atrv_launch)/launch/transforms.xml"/>
+
+  <!-- Start the laser range finder -->
+  <include file="$(find gavlab_atrv_launch)/launch/sick.xml"/>
+
+</launch>
