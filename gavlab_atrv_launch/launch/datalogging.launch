@@ -1,0 +1,7 @@
+<launch>
+  <node pkg="rosbag" type="rosbag" name="rosbag_record"
+    args="record -o ~/Data/atrv_log /xbow440_node/imu/data /tf 
+    /scan /cloud_throttled  /camera/rgb/image_color/compressed
+    /camera/rgb/camera_info /atrv_node/odom /atrv_node/front/encoders
+    /atrv_node/rear/encoders "/>
+</launch>

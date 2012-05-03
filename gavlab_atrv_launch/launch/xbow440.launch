@@ -1,0 +1,8 @@
+<launch>
+  <!-- Start the static transformations -->
+  <include file="$(find gavlab_atrv_launch)/launch/transforms.xml"/>
+
+  <!-- Start the Xbow440 IMU -->
+  <include file="$(find gavlab_atrv_launch)/launch/xbow440.xml"/>
+
+</launch>
