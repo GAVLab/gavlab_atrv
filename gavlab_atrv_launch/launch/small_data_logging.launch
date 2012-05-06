@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="rosbag" type="rosbag" name="rosbag_record" output="screen"
+    args="record -o /home/hododav/Data/atrv_log /xbow440_node/imu/data /tf 
+    /scan /atrv_node/odom /atrv_node/front/encoders
+    /atrv_node/rear/encoders "/>
+</launch>
