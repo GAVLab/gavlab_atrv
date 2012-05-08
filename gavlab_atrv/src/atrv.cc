@@ -143,8 +143,8 @@ ATRV::calculateOdometry(long &encoder1, long &encoder2, double &delta_time,
   velocity += this->wheel_radius_ * left_wheel_speed;
   velocity /= 2.0f;
   double angular_velocity = 0.0f;
-  angular_velocity += this->wheel_radius_/this->track_width_ * left_wheel_speed;
-  angular_velocity -= this->wheel_radius_/this->track_width_ * right_wheel_speed;
+  angular_velocity -= this->wheel_radius_/this->track_width_ * left_wheel_speed;
+  angular_velocity += this->wheel_radius_/this->track_width_ * right_wheel_speed;
   // Calculate new positions
   x += delta_time * velocity * cos(theta + (angular_velocity/2.0f) * delta_time);
   y += delta_time * velocity * sin(theta + (angular_velocity/2.0f) * delta_time);
