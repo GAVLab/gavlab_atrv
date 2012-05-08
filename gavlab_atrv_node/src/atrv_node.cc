@@ -233,6 +233,7 @@ private:
 
     // Update the Odometry Msg
     this->odom_msg.header.stamp = now;
+    this->odom_msg.header.frame_id = "odom";
     this->odom_msg.pose.pose.position.x = this->odometry_x;
     this->odom_msg.pose.pose.position.y = this->odometry_y;
     this->odom_msg.pose.pose.position.z = 0.0f;
