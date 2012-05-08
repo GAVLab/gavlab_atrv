@@ -1,0 +1,10 @@
+<launch>
+    <!-- Start the Map Server -->
+    <include file="$(find gavlab_atrv_2dnav)/launch/empty_map_server.launch" />
+    
+    <!-- Start the ACML Node -->
+    <!-- <include file="$(find gavlab_atrv_2dnav)/launch/amcl_diff.xml" /> -->
+    
+    <!-- Start the move_base Node -->
+    <include file="$(find gavlab_atrv_2dnav)/launch/move_base_amcl.xml" />
+</launch>

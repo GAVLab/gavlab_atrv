@@ -1,0 +1,15 @@
+<package>
+  <description brief="gavlab_atrv_2dnav">
+
+     gavlab_atrv_2dnav
+
+  </description>
+  <author>William Woodall</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/gavlab_atrv_2dnav</url>
+  <depend package="move_base"/>
+
+</package>
+
+

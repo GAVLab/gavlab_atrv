@@ -1,0 +1,10 @@
+<launch>
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <rosparam file="$(find gavlab_atrv_2dnav)/config/slam/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find gavlab_atrv_2dnav)/config/slam/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find gavlab_atrv_2dnav)/config/slam/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find gavlab_atrv_2dnav)/config/slam/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find gavlab_atrv_2dnav)/config/slam/base_local_planner_params.yaml" command="load" />
+        <rosparam file="$(find gavlab_atrv_2dnav)/config/slam/navfn_params.yaml" command="load" />
+    </node>
+</launch>

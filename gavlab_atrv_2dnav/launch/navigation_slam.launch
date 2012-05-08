@@ -1,0 +1,7 @@
+<launch>
+    <!-- Start SLAM -->
+    <include file="$(find gavlab_atrv_2dnav)/launch/slam.xml" />
+    
+    <!-- Start the move_base Node -->
+    <include file="$(find gavlab_atrv_2dnav)/launch/move_base_slam.xml" />
+</launch>
