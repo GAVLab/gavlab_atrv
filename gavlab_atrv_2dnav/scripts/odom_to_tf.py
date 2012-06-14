@@ -24,15 +24,15 @@ def callback(msg):
                      (msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, 
                       msg.pose.pose.orientation.z, msg.pose.pose.orientation.w),
                      msg.header.stamp,
-                     "base_footprint_inv",
-                     "odom")
-    br.sendTransform((0, 0, 0),
-                     qfe(radians(180), 0, 0),
-                     msg.header.stamp,
                      "base_footprint",
-                     "base_footprint_inv")
-    msg.header.frame_id = "odom"
-    pub.publish(msg)
+                     "odom")
+    # br.sendTransform((0, 0, 0),
+    #                  qfe(radians(180), 0, 0),
+    #                  msg.header.stamp,
+    #                  "base_footprint",
+    #                  "base_footprint_inv")
+    # msg.header.frame_id = "odom"
+    # pub.publish(msg)
 
 def main():
     global pub

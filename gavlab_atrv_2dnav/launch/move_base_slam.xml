@@ -6,5 +6,6 @@
         <rosparam file="$(find gavlab_atrv_2dnav)/config/slam/global_costmap_params.yaml" command="load" />
         <rosparam file="$(find gavlab_atrv_2dnav)/config/slam/base_local_planner_params.yaml" command="load" />
         <rosparam file="$(find gavlab_atrv_2dnav)/config/slam/navfn_params.yaml" command="load" />
+        <remap from="cmd_vel" to="atrv_node/cmd_vel"/>
     </node>
 </launch>

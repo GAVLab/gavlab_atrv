@@ -8,6 +8,6 @@ transform_tolerance: 0.2 # Max running just hardware nodes is ~0.0006 secs accor
 observation_sources: hokuyo_laser_scan_sensor
 # observation_sources: laser_scan_sensor point_cloud_sensor
 
-hokuyo_laser_scan_sensor: {sensor_frame: laser, data_type: LaserScan, topic: scan_filtered, 
-                           marking: true, clearing: true,  expected_update_rate: 0.04} # LRF @ 25Hz
+hokuyo_laser_scan_sensor: {sensor_frame: laser_link, data_type: LaserScan, topic: scan_filtered, 
+                           marking: true, clearing: true,  expected_update_rate: 0.1} # LRF @ 25Hz
 # point_cloud_sensor: {sensor_frame: frame_name, data_type: PointCloud, topic: topic_name, marking: true, clearing: true}

@@ -4,4 +4,7 @@
     
     <!-- Start the move_base Node -->
     <include file="$(find gavlab_atrv_2dnav)/launch/move_base_slam.xml" />
+
+    <node pkg="gavlab_atrv_2dnav" type="odom_to_tf.py" name="odom_to_tf" output="screen" />
+  <node pkg="gavlab_atrv_2dnav" type="laser_filter.py" name="laser_filter" output="screen" />
 </launch>
