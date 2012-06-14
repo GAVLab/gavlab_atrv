@@ -8,9 +8,8 @@
   <material name="Blue"><color rgba="0.0 0.0 0.8 1.0"/></material>
   <material name="Black"><color rgba="0.0 0.0 0.0 1.0"/></material>
   <material name="Grey"><color rgba="0.7 0.7 0.7 0.7"/></material>
-  <material name="atrv_orange">
-    <color rgba="0.8 0.16 0.0 1" />
-  </material>
+  <material name="atrv_orange"><color rgba="0.8 0.16 0.0 1" /></material>
+  <material name="clear"><color rgba="0 0 0 0"/></material>
 
 <!-- xacro parameters -->
   <xacro:property name="M_PI" value="3.14159"/>
@@ -51,17 +50,16 @@
     <xacro:default_inertial mass="80"/>
 
     <visual>
-      <origin xyz="0 0 ${chassis_height/2.0}" rpy="0 0 0" />
       <geometry>
-        <box size="${chassis_length} ${chassis_width} ${chassis_height}" />
+        <mesh filename="package://gavlab_atrv_description/meshes/atrv_chassis.dae"/>
       </geometry>
-      <material name="atrv_orange" />
+      <!-- <material name="clear"/> -->
     </visual>
 
     <collision>
       <origin xyz="0 0 ${chassis_height/2.0}" rpy="0 0 0" />
       <geometry>
-        <box size="${chassis_length_bumpers} ${chassis_width} ${chassis_height}" />
+        <box size="${chassis_length} ${chassis_width} ${chassis_height}" />
       </geometry>
     </collision>
   </link>
