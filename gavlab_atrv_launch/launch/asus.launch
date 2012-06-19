@@ -1,0 +1,14 @@
+<launch>
+  <!-- Start the static transformations -->
+  <include file="$(find openni_launch)/launch/openni.launch">
+  	<arg name="camera" value="asus"/>
+  	<!-- <arg name="debug" value="true"/> -->
+  </include>
+
+  <!-- Set the Kinect's parameters, like resolution -->
+  <!-- <param name="/asus/driver/depth_mode" value="8"/> -->
+  <!-- <param name="/asus/driver/image_mode" value="8"/> -->
+  <param name="/asus/driver/depth_registration" value="true"/>
+  <param name="/asus/driver/data_skip" value="5"/>
+
+</launch>

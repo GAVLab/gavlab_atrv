@@ -1,8 +1,12 @@
 <launch>
   <!-- Start the static transformations -->
-  <include file="$(find gavlab_atrv_launch)/launch/transforms.xml"/>
+  <include file="$(find openni_launch)/launch/openni.launch">
+  	<arg name="camera" value="kinect"/>
+  </include>
 
-  <!-- Start the Microsoft Kinect -->
-  <include file="$(find gavlab_atrv_launch)/launch/kinect.xml"/>
+  <!-- Set the Kinect's parameters, like resolution -->
+  <param name="/kinect/driver/depth_mode" value="8"/>
+  <param name="/kinect/driver/image_mode" value="8"/>
+  <param name="/kinect/driver/depth_registration" value="true"/>
 
 </launch>

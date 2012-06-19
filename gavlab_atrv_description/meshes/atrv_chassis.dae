@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.61.0 r42614</authoring_tool>
     </contributor>
-    <created>2012-06-13T19:48:11</created>
-    <modified>2012-06-13T19:48:11</modified>
+    <created>2012-06-14T21:49:30</created>
+    <modified>2012-06-14T21:49:30</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -1093,7 +1093,7 @@
     <geometry id="Cube-mesh">
       <mesh>
         <source id="Cube-mesh-positions">
-          <float_array id="Cube-mesh-positions-array" count="144">0.8536364 1 -1 0.8536364 -1 -1 -0.8480072 -0.9999998 -1 -0.8480067 1 -1 1 0.8221328 1 0.9999993 -0.8221338 1 -0.532763 -0.822133 1 -0.5327627 0.8221333 1 0.9999996 -1 0.1211485 1 0.9999997 0.1211485 -1 -0.9999997 0.1211485 -0.9999998 1 0.1211485 0.9999995 -1 0.4426506 1 0.9999996 0.4426506 -1 -0.9999997 0.4426506 -0.9999999 1 0.4426506 0.9999998 -1 -0.7051796 1 0.9999998 -0.7051796 -1 -0.9999998 -0.7051796 -0.9999997 1 -0.7051796 0.9999995 -1 0.1507071 1 0.9999997 0.1507071 -1 -0.9999997 0.1507071 -0.9999998 1 0.1507071 -0.9919786 0.991979 0.1505885 0.991979 0.9919784 0.1505885 -0.9919791 -0.9919785 0.1505885 0.9919784 -0.991979 0.1505885 0.991979 0.9919784 0.1212671 -0.9919786 0.991979 0.1212671 -0.9919791 -0.9919785 0.1212671 0.9919784 -0.991979 0.1212671 0.9999995 -0.9739583 0.4578838 1 0.9739574 0.4578838 1 0.8007227 0.9847669 0.9999994 -0.8007237 0.9847669 0.982639 0.8007228 0.9847669 0.9826378 -0.8007237 0.9847669 0.982638 -0.9739582 0.4578838 0.9826388 0.9739575 0.4578838 -0.9852832 -0.9547467 0.460206 -0.9852828 0.9547472 0.460206 -0.5474797 0.7849293 0.9824446 -0.54748 -0.784929 0.9824446 -0.5393894 -0.784929 0.9643654 -0.5393891 0.7849293 0.9643654 -0.9771926 -0.9547467 0.4421268 -0.9771922 0.9547472 0.4421268</float_array>
+          <float_array id="Cube-mesh-positions-array" count="144">0.8536364 1 0 0.8536364 -1 0 -0.8480072 -0.9999998 0 -0.8480067 1 0 1 0.8221328 2 0.9999993 -0.8221338 2 -0.532763 -0.822133 2 -0.5327627 0.8221333 2 0.9999996 -1 1.121149 1 0.9999997 1.121149 -1 -0.9999997 1.121149 -0.9999998 1 1.121149 0.9999995 -1 1.442651 1 0.9999996 1.442651 -1 -0.9999997 1.442651 -0.9999999 1 1.442651 0.9999998 -1 0.2948204 1 0.9999998 0.2948204 -1 -0.9999998 0.2948204 -0.9999997 1 0.2948204 0.9999995 -1 1.150707 1 0.9999997 1.150707 -1 -0.9999997 1.150707 -0.9999998 1 1.150707 -0.9919786 0.991979 1.150588 0.991979 0.9919784 1.150588 -0.9919791 -0.9919785 1.150588 0.9919784 -0.991979 1.150588 0.991979 0.9919784 1.121267 -0.9919786 0.991979 1.121267 -0.9919791 -0.9919785 1.121267 0.9919784 -0.991979 1.121267 0.9999995 -0.9739583 1.457884 1 0.9739574 1.457884 1 0.8007227 1.984767 0.9999994 -0.8007237 1.984767 0.982639 0.8007228 1.984767 0.9826378 -0.8007237 1.984767 0.982638 -0.9739582 1.457884 0.9826388 0.9739575 1.457884 -0.9852832 -0.9547467 1.460206 -0.9852828 0.9547472 1.460206 -0.5474797 0.7849293 1.982445 -0.54748 -0.784929 1.982445 -0.5393894 -0.784929 1.964365 -0.5393891 0.7849293 1.964365 -0.9771926 -0.9547467 1.442127 -0.9771922 0.9547472 1.442127</float_array>
           <technique_common>
             <accessor source="#Cube-mesh-positions-array" count="48" stride="3">
               <param name="X" type="float"/>
@@ -1103,7 +1103,7 @@
           </technique_common>
         </source>
         <source id="Cube-mesh-normals">
-          <float_array id="Cube-mesh-normals-array" count="132">0 0 -1 0 0 1 -4.18164e-7 -0.9526646 0.3040235 2.88389e-7 0.9526645 0.3040235 0.8956956 0 -0.4446679 1 -2.5332e-7 0 -1.28818e-7 -1 -2.03403e-7 -2.23517e-7 -1 0 -0.8888324 2.38661e-7 -0.4582324 -1 2.68221e-7 0 2.68221e-7 1 0 2.41533e-7 1 5.07738e-7 1 -3.8743e-7 -2.04165e-7 -3.12924e-7 -1 0 -1 2.08616e-7 -2.04165e-7 2.83122e-7 1 3.06247e-7 0 0.01477831 -0.9998908 -0.01477849 0 -0.9998908 0 -0.01477831 -0.9998908 0.01477837 0 -0.9998908 0 0.01477742 0.9998908 -0.01477754 0 0.9998908 0 -0.01477742 0.9998908 0.01477748 0 0.9998908 3.00433e-7 1 0 -1 2.7039e-7 0 -2.7039e-7 -1 0 1 -3.15455e-7 1.0164e-6 1 -4.22737e-7 0 1 0 -2.19896e-7 1 -1.2561e-6 7.91574e-7 1 -7.162e-7 1.95641e-6 0 0 -1 3.09498e-6 0.9499698 -0.3123418 -3.48185e-6 -0.9499698 -0.3123421 0 0 1 -0.7663383 1.40061e-7 0.6424372 -0.7663385 0 0.6424371 -0.7663385 5.13116e-7 0.6424369 -0.7663396 1.56133e-7 0.6424359 -0.9127698 1.73159e-7 -0.4084741 -0.2437083 0.9636968 -0.1090619 -0.2437086 -0.9636968 -0.1090622 0.9127702 -1.71024e-7 0.4084736</float_array>
+          <float_array id="Cube-mesh-normals-array" count="132">0 0 -1 0 0 1 -4.18164e-7 -0.9526646 0.3040234 2.91993e-7 0.9526644 0.3040235 0.8956956 0 -0.4446679 1 -2.5332e-7 0 -1.28818e-7 -1 -2.03403e-7 -2.23517e-7 -1 0 -0.8888324 2.38661e-7 -0.4582324 -1 2.68221e-7 0 2.68221e-7 1 0 2.41533e-7 1 5.07738e-7 1 -3.8743e-7 -2.04165e-7 -3.12924e-7 -1 0 -1 2.08616e-7 -2.04165e-7 2.83122e-7 1 3.06248e-7 0 0.01478576 -0.9998906 -0.01478594 0 -0.9998907 0 -0.01478576 -0.9998906 0.01478582 0 -0.9998906 0 0.01477092 0.9998909 -0.01477104 0 0.9998909 0 -0.01477092 0.9998909 0.01477098 0 0.9998909 3.00433e-7 1 0 -1 2.7039e-7 0 -2.7039e-7 -1 0 1 -3.15455e-7 1.0164e-6 1 -4.22737e-7 0 1 0 -2.19896e-7 1 -1.2561e-6 7.91574e-7 1 -7.162e-7 1.95641e-6 0 0 -1 3.48185e-6 0.9499698 -0.3123418 -3.48185e-6 -0.9499698 -0.3123421 0 0 1 -0.76634 1.40061e-7 0.6424354 -0.7663385 0 0.6424371 -0.7663385 5.13116e-7 0.6424369 -0.7663406 1.56133e-7 0.6424345 -0.9127689 1.73394e-7 -0.4084764 -0.2437083 0.9636968 -0.1090619 -0.2437086 -0.9636968 -0.1090622 0.912771 -1.70831e-7 0.4084719</float_array>
           <technique_common>
             <accessor source="#Cube-mesh-normals-array" count="44" stride="3">
               <param name="X" type="float"/>
@@ -1142,7 +1142,7 @@
         </instance_geometry>
       </node>
       <node id="Cube_013" type="NODE">
-        <translate sid="location">0.4298987 0.2216459 0.164923</translate>
+        <translate sid="location">0.4298987 0.2268498 0.164923</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1156,7 +1156,7 @@
         </instance_geometry>
       </node>
       <node id="Cube_012" type="NODE">
-        <translate sid="location">0.4298987 -0.2221231 0.164923</translate>
+        <translate sid="location">0.4298987 -0.2268428 0.164923</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1170,7 +1170,7 @@
         </instance_geometry>
       </node>
       <node id="Cube_011" type="NODE">
-        <translate sid="location">-0.4300525 -0.2221231 0.164923</translate>
+        <translate sid="location">-0.4300525 -0.2268428 0.164923</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1184,7 +1184,7 @@
         </instance_geometry>
       </node>
       <node id="Cube_010" type="NODE">
-        <translate sid="location">-0.4300525 0.2216459 0.164923</translate>
+        <translate sid="location">-0.4300525 0.2268498 0.164923</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1198,7 +1198,7 @@
         </instance_geometry>
       </node>
       <node id="Cube_009" type="NODE">
-        <translate sid="location">-0.2863069 0 0.6540727</translate>
+        <translate sid="location">-0.2863069 0 0.6488181</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 12.41351</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1212,7 +1212,7 @@
         </instance_geometry>
       </node>
       <node id="Cylinder_012" type="NODE">
-        <translate sid="location">-0.3112195 -0.0278942 0.5809783</translate>
+        <translate sid="location">-0.3112195 -0.0278942 0.5757237</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 -74.87617</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1226,7 +1226,7 @@
         </instance_geometry>
       </node>
       <node id="Cylinder_011" type="NODE">
-        <translate sid="location">-0.3112195 -0.03950176 0.5809783</translate>
+        <translate sid="location">-0.3112195 -0.03950176 0.5757237</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 -74.87617</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1240,7 +1240,7 @@
         </instance_geometry>
       </node>
       <node id="Cylinder_010" type="NODE">
-        <translate sid="location">-0.3093734 -0.08437786 0.5804793</translate>
+        <translate sid="location">-0.3093734 -0.08437786 0.5752248</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 -74.87617</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1254,7 +1254,7 @@
         </instance_geometry>
       </node>
       <node id="Cylinder_009" type="NODE">
-        <translate sid="location">-0.3112195 -0.05028501 0.5809783</translate>
+        <translate sid="location">-0.3112195 -0.05028501 0.5757237</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 -74.87617</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1262,7 +1262,7 @@
         <instance_geometry url="#Cylinder_020-mesh"/>
       </node>
       <node id="Cylinder_008" type="NODE">
-        <translate sid="location">-0.3112195 0.03788656 0.5809783</translate>
+        <translate sid="location">-0.3112195 0.03788656 0.5757237</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 -74.87617</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1270,7 +1270,7 @@
         <instance_geometry url="#Cylinder_019-mesh"/>
       </node>
       <node id="Cylinder_007" type="NODE">
-        <translate sid="location">-0.3112195 0.05288656 0.5809783</translate>
+        <translate sid="location">-0.3112195 0.05288656 0.5757237</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 -74.87617</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1278,7 +1278,7 @@
         <instance_geometry url="#Cylinder_018-mesh"/>
       </node>
       <node id="Cylinder_006" type="NODE">
-        <translate sid="location">-0.3112195 0.06788656 0.5809783</translate>
+        <translate sid="location">-0.3112195 0.06788656 0.5757237</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 -74.87617</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1286,7 +1286,7 @@
         <instance_geometry url="#Cylinder_017-mesh"/>
       </node>
       <node id="Cylinder_005" type="NODE">
-        <translate sid="location">-0.3112195 0.08288656 0.5809783</translate>
+        <translate sid="location">-0.3112195 0.08288656 0.5757237</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 -74.87617</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1294,7 +1294,7 @@
         <instance_geometry url="#Cylinder_016-mesh"/>
       </node>
       <node id="Cylinder_003" type="NODE">
-        <translate sid="location">-0.3112195 0.09788656 0.5809783</translate>
+        <translate sid="location">-0.3112195 0.09788656 0.5757237</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 -74.87617</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1302,7 +1302,7 @@
         <instance_geometry url="#Cylinder_015-mesh"/>
       </node>
       <node id="Cube_008" type="NODE">
-        <translate sid="location">-0.2863069 0 0.6540727</translate>
+        <translate sid="location">-0.2863069 0 0.6488181</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 12.41351</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1316,7 +1316,7 @@
         </instance_geometry>
       </node>
       <node id="Cube_007" type="NODE">
-        <translate sid="location">-0.2863069 0 0.6540727</translate>
+        <translate sid="location">-0.2863069 0 0.6488181</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 12.41351</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1330,7 +1330,7 @@
         </instance_geometry>
       </node>
       <node id="Cylinder_002" type="NODE">
-        <translate sid="location">-0.3112195 0 0.5407888</translate>
+        <translate sid="location">-0.3112195 0 0.5355343</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 12.15367</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1344,7 +1344,7 @@
         </instance_geometry>
       </node>
       <node id="Cylinder_001" type="NODE">
-        <translate sid="location">-0.3112195 0 0.5170022</translate>
+        <translate sid="location">-0.3112195 0 0.5117476</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1358,7 +1358,7 @@
         </instance_geometry>
       </node>
       <node id="Cylinder" type="NODE">
-        <translate sid="location">-0.3112195 0 0.491</translate>
+        <translate sid="location">-0.3112195 0 0.4857454</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1372,7 +1372,7 @@
         </instance_geometry>
       </node>
       <node id="Cube_006" type="NODE">
-        <translate sid="location">-0.05321477 0 0.4978707</translate>
+        <translate sid="location">-0.05321477 0 0.4926161</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1386,7 +1386,7 @@
         </instance_geometry>
       </node>
       <node id="Cylinder_004" type="NODE">
-        <translate sid="location">0.03237973 -8.26402e-9 0.5152115</translate>
+        <translate sid="location">0.03237973 -8.26402e-9 0.509957</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 90</rotate>
@@ -1400,7 +1400,7 @@
         </instance_geometry>
       </node>
       <node id="Cube_005" type="NODE">
-        <translate sid="location">0.1011808 0.09643114 0.5150511</translate>
+        <translate sid="location">0.1011808 0.09643114 0.5097965</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1414,7 +1414,7 @@
         </instance_geometry>
       </node>
       <node id="Cube_004" type="NODE">
-        <translate sid="location">0.1011808 -0.09653247 0.5150511</translate>
+        <translate sid="location">0.1011808 -0.09653247 0.5097965</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1428,7 +1428,7 @@
         </instance_geometry>
       </node>
       <node id="Cube_002" type="NODE">
-        <translate sid="location">-0.2224041 0.1117894 0.5251616</translate>
+        <translate sid="location">-0.2224041 0.1117894 0.5199071</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1442,7 +1442,7 @@
         </instance_geometry>
       </node>
       <node id="Cube_003" type="NODE">
-        <translate sid="location">-0.2224041 -0.1116719 0.5251616</translate>
+        <translate sid="location">-0.2224041 -0.1116719 0.5199071</translate>
         <rotate sid="rotationZ">0 0 1 0</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
@@ -1460,7 +1460,7 @@
         <rotate sid="rotationZ">0 0 1 180</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
-        <scale sid="scale">0.3999998 0.2249999 0.245</scale>
+        <scale sid="scale">0.3999998 0.2302603 0.2424053</scale>
         <instance_geometry url="#Cube_001-mesh">
           <bind_material>
             <technique_common>
@@ -1470,11 +1470,11 @@
         </instance_geometry>
       </node>
       <node id="Cube" type="NODE">
-        <translate sid="location">0 0 0.245</translate>
+        <translate sid="location">0 0 0</translate>
         <rotate sid="rotationZ">0 0 1 180</rotate>
         <rotate sid="rotationY">0 1 0 0</rotate>
         <rotate sid="rotationX">1 0 0 0</rotate>
-        <scale sid="scale">0.3999998 0.2249999 0.245</scale>
+        <scale sid="scale">0.3999998 0.2298881 0.2424053</scale>
         <instance_geometry url="#Cube-mesh">
           <bind_material>
             <technique_common>

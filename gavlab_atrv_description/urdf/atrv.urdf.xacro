@@ -110,6 +110,15 @@
   <!-- right_rear_wheel_link -->
   <xacro:wheel prefix="right_rear" reflect_x="-1" reflect_y="-1" />
 
+  <!-- Imu Link -->
+  <link name="imu_frame"/>
+
+  <joint name="base_imu_joint" type="fixed">
+    <origin xyz="-0.11 0 0.27" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="imu_frame"/>
+  </joint>
+
   <!-- laser_link -->
   <xacro:property name="laser_radius" value="0.045"/>
   <xacro:property name="laser_height" value="0.16"/>
@@ -140,7 +149,7 @@
   </joint>
 
   <!-- kinect_link -->
-  <link name="kinect_link">
+  <link name="asus_link">
     <xacro:default_inertial mass="0.0001"/>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -160,16 +169,7 @@
   <joint name="base_kinect_joint" type="fixed">
     <origin xyz="${(chassis_length/2)-0.19} 0 ${chassis_height+0.13-0.06}" rpy="0 0 0"/>
     <parent link="base_link"/>
-    <child link="kinect_link"/>
+    <child link="asus_link"/>
   </joint>
-
-  <link name="openni_camera"/>
-
-  <!-- kinect_link -> openni_camera (This is the openni_camera pkg's tf's) -->
-  <joint name="kinect_openni_camera_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <parent link="kinect_link"/>
-    <child link="openni_camera"/>
-  </joint>  
 
 </robot>

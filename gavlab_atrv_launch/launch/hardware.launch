@@ -9,11 +9,11 @@
   <!-- Start the laser range finder -->
   <include file="$(find gavlab_atrv_launch)/launch/sick.xml"/>
 
-  <!-- Start the Kinect -->
-  <include file="$(find gavlab_atrv_launch)/launch/kinect.xml"/>
+  <!-- Start the Kinect 
+  <include file="$(find gavlab_atrv_launch)/launch/kinect.xml"/> -->
 
   <!-- Start the xbow440 -->
-  <include file="$(find gavlab_atrv_launch)/launch/xbow440.xml"/>
+  <include file="$(find gavlab_atrv_launch)/launch/xbow440.xml"/> 
 
   <!-- Start the node that interfaces with the motor controllers -->
   <node pkg="gavlab_atrv_node" type="atrv_node" name="atrv_node"
