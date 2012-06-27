@@ -9,8 +9,8 @@
   <!-- Start the laser range finder -->
   <include file="$(find gavlab_atrv_launch)/launch/sick.xml"/>
 
-  <!-- Start the Kinect 
-  <include file="$(find gavlab_atrv_launch)/launch/kinect.xml"/> -->
+  <!-- Start the ASUS -->
+  <include file="$(find gavlab_atrv_launch)/launch/asus.launch"/>
 
   <!-- Start the xbow440 -->
   <include file="$(find gavlab_atrv_launch)/launch/xbow440.xml"/> 
@@ -21,4 +21,6 @@
     <param name="front_port" value="$(arg front_port)" />
     <param name="rear_port" value="$(arg rear_port)" />
   </node>
+
+  <node pkg="gavlab_atrv_2dnav" type="odom_to_tf.py" name="odom_to_tf"/>
 </launch>
