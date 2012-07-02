@@ -8,8 +8,8 @@ REPLACE ME WITH LINK TO DOCS!
 
 * CMake, for the build system: http://www.cmake.org/
 * MDC2250, for the interface to the motorcontrollers: https://github.com/GAVLab/mdc2250
-** Serial, for serial rs-232 interface: https://github.com/wjwwood/serial
-** Boost, for threading, function pointers, and shared_ptr's: http://www.boost.org/
+ * Serial, for serial rs-232 interface: https://github.com/wjwwood/serial
+ * Boost, for threading, function pointers, and shared_ptr's: http://www.boost.org/
 
 ## Installation
 
