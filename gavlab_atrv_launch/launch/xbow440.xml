@@ -1,6 +1,6 @@
 <launch>
   <!-- Sick LMS1xx driver -->
-  <node name="xbow440_node" pkg="xbow440" type="xbow440_node" output="screen" required="true">
+  <node name="xbow440_node" pkg="xbow440" type="xbow440_node" output="screen" required="false">
     <param name="port" value="/dev/ttyS7"/>
     <param name="baudrate" value="57600" />
   </node>

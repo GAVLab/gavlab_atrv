@@ -1,6 +1,12 @@
 <launch>
 	<node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
 		<remap from="scan" to="scan_filtered"/>
+        <param name="xmin" value="-10"/>
+        <param name="xmax" value="10"/>
+        <param name="ymin" value="-10"/>
+        <param name="ymax" value="10"/>
+        <param name="linearUpdate" value="0.2"/>
+        <param name="angularUpdate" value="0.2"/>
 		<!-- <param name="delta" value="0.01"/> -->
 	</node>
 </launch>
