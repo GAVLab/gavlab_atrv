@@ -1,0 +1,27 @@
+<package>
+  <name>throttle_pointcloud</name>
+  <version>0.0.0</version>
+
+  <description>
+    Throttles a pointcloud down to a given rate, good for reducing the output rate of the kinect data.
+  </description>
+
+  <maintainer email="jdp0009@auburn.edu">Dan Pierce</maintainer>
+
+  <author>Tully Foote</author>
+  <license>BSD</license>
+  <url>http://ros.org/wiki/throttle_pointcloud</url>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>nodelet</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+
+  <run_depend>nodelet</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+
+  <export>
+    <nodelet plugin="${prefix}/nodelets.xml" />
+  </export>
+
+</package>

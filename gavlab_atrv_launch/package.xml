@@ -1,0 +1,40 @@
+<package>
+  <name>gavlab_atrv_launch</name>
+  <version>0.0.0</version>
+
+  <description>
+     gavlab_atrv_launch
+  </description>
+
+  <maintainer email="jdp0009@auburn.edu">Dan Pierce</maintainer>
+
+  <author>William Woodall</author>
+  <license>BSD</license>
+  <url>http://ros.org/wiki/gavlab_atrv_launch</url>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>gavlab_atrv_node</build_depend>
+  <build_depend>lms1xx</build_depend>
+  <build_depend>nodelet</build_depend>
+  <build_depend>openni_camera</build_depend>
+  <build_depend>throttle_pointcloud</build_depend>
+  <build_depend>urdf</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>joy</build_depend>
+
+  <run_depend>gavlab_atrv_node</run_depend>
+  <run_depend>lms1xx</run_depend>
+  <run_depend>nodelet</run_depend>
+  <run_depend>openni_camera</run_depend>
+  <run_depend>throttle_pointcloud</run_depend>
+  <run_depend>urdf</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>joy</run_depend>
+
+  <export>
+  </export>
+
+</package>
+
+
