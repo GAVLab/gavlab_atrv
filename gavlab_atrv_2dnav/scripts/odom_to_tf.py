@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
-import roslib; roslib.load_manifest('gavlab_atrv_2dnav')
-
 import rospy
 from nav_msgs.msg import Odometry
 import tf
 from tf.transformations import quaternion_from_euler as qfe
 from tf.transformations import euler_from_quaternion as efq
 from math import radians
+
+rospy.init_node('odom_to_tf')
 
 pub = None
 

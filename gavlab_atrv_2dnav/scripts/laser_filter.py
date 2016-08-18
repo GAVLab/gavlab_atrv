@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-
-import roslib; roslib.load_manifest('gavlab_atrv_2dnav')
-
 import rospy
 from sensor_msgs.msg import LaserScan
 import tf
+
+rospy.init_node('laser_filter')
 
 def callback(msg, pub):
     ranges = list(msg.ranges)

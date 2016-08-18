@@ -1,0 +1,31 @@
+<package>
+  <name>gavlab_atrv_2dnav</name>
+  <version>0.0.0</version>
+
+  <description>
+     gavlab_atrv_2dnav
+  </description>
+
+  <maintainer email="jdp0009@auburn.edu">Dan Pierce</maintainer>
+
+  <author>William Woodall</author>
+  <license>BSD</license>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>rospy</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>move_base</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+
+  <run_depend>rospy</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>move_base</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+
+  <export>
+  </export>
+
+</package>
