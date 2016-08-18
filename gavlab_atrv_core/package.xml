@@ -1,0 +1,25 @@
+<package>
+  <name>gavlab_atrv_core</name>
+  <version>0.0.0</version>
+
+  <description>
+     gavlab_atrv_core
+  </description>
+
+  <maintainer email="jdp0009@auburn.edu">Dan Pierce</maintainer>
+
+  <author>William Woodall</author>
+  <license>BSD</license>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>mdc2250</build_depend>
+
+  <run_depend>mdc2250</run_depend>
+
+  <export>
+  </export>
+
+</package>
+
+

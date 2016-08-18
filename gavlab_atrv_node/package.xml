@@ -1,0 +1,37 @@
+<package>
+  <name>gavlab_atrv_node</name>
+  <version>0.0.0</version>
+
+  <description>
+     gavlab_atrv_node
+  </description>
+
+  <maintainer email="jdp0009@auburn.edu">Dan Pierce</maintainer>
+
+  <author>William Woodall</author>
+  <license>BSD</license>
+  <url>http://ros.org/wiki/gavlab_atrv_node</url>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>gavlab_atrv_core</build_depend>
+
+  <run_depend>roscpp</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>message_generation</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>gavlab_atrv_core</run_depend>
+
+  <export>
+  </export>
+
+</package>
+
+

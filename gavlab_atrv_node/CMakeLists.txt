@@ -1,38 +1,65 @@
 cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 
-# Set the build type.  Options are:
-#  Coverage       : w/ debug symbols, w/o optimization, w/ code-coverage
-#  Debug          : w/ debug symbols, w/o optimization
-#  Release        : w/o debug symbols, w/ optimization
-#  RelWithDebInfo : w/ debug symbols, w/ optimization
-#  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
-set(ROS_BUILD_TYPE Debug)
+if(COMMAND cmake_policy)
+  cmake_policy(SET CMP0003 NEW)
+endif(COMMAND cmake_policy)
 
-rosbuild_init()
+project(gavlab_atrv_node)
 
-#set the default path for built executables to the "bin" directory
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-#set the default path for built libraries to the "lib" directory
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  tf
+  message_generation
+  geometry_msgs
+  nav_msgs
+  gavlab_atrv_core
+)
 
-# Use clang if available
-IF(EXISTS /usr/bin/clang)
-  set(CMAKE_CXX_COMPILER /usr/bin/clang++)
-  set(CMAKE_OSX_DEPLOYMENT_TARGET "")
-  set(CMAKE_CXX_FLAGS "-ferror-limit=5")
-  set(CMAKE_BUILD_TYPE Debug)
-ENDIF(EXISTS /usr/bin/clang)
+find_package(cmake_modules REQUIRED)
 
-#uncomment if you have defined messages
-rosbuild_genmsg()
-#uncomment if you have defined services
-#rosbuild_gensrv()
+#######################################
+## Declare ROS messages and services ##
+#######################################
 
-#common commands for building c++ executables and libraries
-#rosbuild_add_library(${PROJECT_NAME} src/example.cpp)
-#target_link_libraries(${PROJECT_NAME} another_library)
-#rosbuild_add_boost_directories()
-#rosbuild_link_boost(${PROJECT_NAME} thread)
-rosbuild_add_executable(atrv_node src/atrv_node.cc)
-#target_link_libraries(example ${PROJECT_NAME})
+## Generate messages in the 'msg' folder
+add_message_files(
+  FILES
+    StampedEncoders.msg
+)
+
+## Generate added messages and services with any dependencies listed here
+generate_messages(
+  DEPENDENCIES
+    std_msgs
+)
+
+catkin_package(
+    LIBRARIES ${PROJECT_NAME}
+    CATKIN_DEPENDS 
+      roscpp
+      tf
+      message_generation
+      message_runtime
+      geometry_msgs
+      nav_msgs
+      gavlab_atrv_core
+    DEPENDS system_lib
+)
+
+add_library(${PROJECT_NAME} src/atrv_node.cc ${catkin_INCLUDE_DIRS})
+
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
+
+## Include headers
+include_directories(
+	${catkin_INCLUDE_DIRS}
+)
+
+## Install executable
+install(TARGETS ${PROJECT_NAME}
+    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+)
+
+## Install headers
+# install(FILES include/atrv/atrv.h DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}/gavlab_atrv_node)

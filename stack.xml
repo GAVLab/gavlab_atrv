@@ -1,9 +1,0 @@
-<stack>
-  <description brief="gavlab_atrv">gavlab_atrv</description>
-  <author>Maintained by William Woodall</author>
-  <license>BSD</license>
-  <review status="unreviewed" notes=""/>
-  <url>http://ros.org/wiki/gavlab_atrv</url>
-  <depend stack="ros" />
-
-</stack>
