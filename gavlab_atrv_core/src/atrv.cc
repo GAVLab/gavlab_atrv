@@ -172,7 +172,8 @@ ATRV::connect_(MDC2250 *mc, size_t i, const std::string &port,
     // Setup encoder ppr
     std::string fail_why = "";
     std::stringstream cmd;
-    cmd << "^EPPR 1" << this->encoder_ppr_;
+    cmd.str("^EPPR 1");
+    cmd << this->encoder_ppr_;
     if (error_str.empty() && mc->issueCommand(cmd.str(), fail_why)) {
       error_str = fail_why;
     }
