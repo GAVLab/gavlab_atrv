@@ -4,7 +4,7 @@
   <arg name="rear_port" default="/dev/atrv_rear_wheels" />
 
   <!-- Start the node that interfaces with the motor controllers -->
-  <node pkg="gavlab_atrv_node" type="atrv_node" name="atrv_node"
+  <node pkg="gavlab_atrv_node" type="gavlab_atrv_node" name="atrv_node"
         output="screen" required="true">
     <param name="front_port" value="$(arg front_port)" />
     <param name="rear_port" value="$(arg rear_port)" />

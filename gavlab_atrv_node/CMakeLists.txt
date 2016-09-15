@@ -55,10 +55,13 @@ include_directories(
 	${catkin_INCLUDE_DIRS}
 )
 
+add_executable(${PROJECT_NAME} src/atrv_node.cc)
+
 ## Install executable
 install(TARGETS ${PROJECT_NAME}
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 ## Install headers
