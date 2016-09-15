@@ -1,0 +1,26 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="front_port" default="/dev/atrv_front_wheels" />
+  <arg name="rear_port" default="/dev/atrv_rear_wheels" />
+
+  <!-- Start the node that interfaces with the motor controllers -->
+  <node pkg="gavlab_atrv_node" type="atrv_node" name="atrv_node"
+        output="screen" required="true">
+    <param name="front_port" value="$(arg front_port)" />
+    <param name="rear_port" value="$(arg rear_port)" />
+  </node>
+
+  <!-- Start the joy stick interface node -->
+  <node pkg="joy" type="joy_node" name="joy_node" output="screen" 
+        required="true">
+    <param name="autorepeat_rate" value="5" type="double" />
+  </node>
+
+  <!-- Start the node that converts joy messages to cmd_vel's -->
+  <node pkg="joy_to_twist" type="joy_to_twist.py" name="atrv_joy_to_twist"
+        output="screen" required="true">
+    <param name="max_linear_vel" type="double" value="1.5" />
+    <param name="max_angular_vel" type="double" value="1.5" />
+    <remap from="cmd_vel" to="atrv_node/cmd_vel" />
+  </node>
+</launch>
