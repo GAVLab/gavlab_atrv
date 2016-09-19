@@ -169,6 +169,21 @@ ATRV::connect_(MDC2250 *mc, size_t i, const std::string &port,
     size_t period = 10;
     mc->setTelemetry(telem, period,
                     boost::bind(&ATRV::parse_telemetry_,this,i,_1));
+    
+    // Set to open loop mode
+    // std::string fail_why = "";
+    // std::stringstream cmd;
+    // cmd.str("^MMOD 1");
+    // cmd << 1;
+    // if (error_str.empty() && mc->issueCommand(cmd.str(), fail_why)) {
+    //   error_str = fail_why;
+    // }
+    // cmd.str("^MMOD 2");
+    // cmd << 1;
+    // if (error_str.empty() && mc->issueCommand(cmd.str(), fail_why)) {
+    //   error_str = fail_why;
+    // }
+    
     // Setup encoder ppr
     std::string fail_why = "";
     std::stringstream cmd;

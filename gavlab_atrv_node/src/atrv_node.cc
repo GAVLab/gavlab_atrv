@@ -207,8 +207,8 @@ private:
       this->rear_encoder_pub.publish(this->rear_encoder_msg);
     }
 
-    // Only use the rear motors for odometry
-    if (motor_index == 1) {
+    // Only use the front motors for odometry
+    if (motor_index == 2) {
       return;
     }
 
