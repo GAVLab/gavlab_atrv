@@ -2,6 +2,8 @@
   <!-- Arguments -->
   <arg name="front_port" default="/dev/atrv_front_wheels_usb" />
   <arg name="rear_port" default="/dev/atrv_rear_wheels_usb" />
+  <!-- <arg name="front_port" default="/dev/atrv_front_wheels" /> -->
+  <!-- <arg name="rear_port" default="/dev/atrv_rear_wheels" /> -->
   <!-- <arg name="front_port" default="/dev/ttyACM1" /> -->
   <!-- <arg name="rear_port" default="/dev/ttyACM0" /> -->
 
