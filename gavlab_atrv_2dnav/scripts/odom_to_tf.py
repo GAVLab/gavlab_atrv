@@ -13,12 +13,14 @@ pub = None
 
 def callback(msg):
     global pub
-    # r, p, y = efq((msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, msg.pose.pose.orientation.z, msg.pose.pose.orientation.w))
+    r, p, y = efq((msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, msg.pose.pose.orientation.z, msg.pose.pose.orientation.w))
     # q = qfe(r, p, -y)
-    # msg.pose.pose.orientation.x = q[0]
-    # msg.pose.pose.orientation.y = q[1]
-    # msg.pose.pose.orientation.z = q[2]
-    # msg.pose.pose.orientation.w = q[3]
+    q = qfe(r, p, y)
+
+    msg.pose.pose.orientation.x = q[0]
+    msg.pose.pose.orientation.y = q[1]
+    msg.pose.pose.orientation.z = q[2]
+    msg.pose.pose.orientation.w = q[3]
     br = tf.TransformBroadcaster()
     br.sendTransform((msg.pose.pose.position.x, msg.pose.pose.position.y, 0),
                      (msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, 
@@ -31,8 +33,8 @@ def callback(msg):
     #                  msg.header.stamp,
     #                  "base_footprint",
     #                  "base_footprint_inv")
-    # msg.header.frame_id = "odom"
-    # pub.publish(msg)
+    msg.header.frame_id = "odom"
+    pub.publish(msg)
 
 def main():
     global pub

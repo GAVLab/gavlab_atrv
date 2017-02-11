@@ -110,7 +110,7 @@ ATRV::move(double linear_velocity, double angular_velocity) {
 
   // Issue command
   this->front_mc_.commandMotors(left_wheel_effort_, right_wheel_effort_);
-  this->rear_mc_.commandMotors(left_wheel_effort_, right_wheel_effort_);
+  this->rear_mc_.commandMotors(-left_wheel_effort_, right_wheel_effort_);
 }
 
 void

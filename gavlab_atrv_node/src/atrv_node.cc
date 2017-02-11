@@ -151,7 +151,7 @@ public:
     if (!this->connected)
       return;
     boost::mutex::scoped_lock lock(m_mutex);
-    double x = msg->linear.x, z = msg->angular.z;
+    double x = msg->linear.x, z = -msg->angular.z;
     // ROS_INFO("Command motor to: %f, %f", x, z);
     this->linear_vel = x;
     this->angular_vel = z;

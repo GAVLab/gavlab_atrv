@@ -168,7 +168,7 @@
   <!-- base_link -> base_kinect_join -->
   <joint name="base_kinect_joint" type="fixed">
   <!-- <joint name="base_kinect_joint" type="planar"> -->
-    <origin xyz="${(chassis_length/2)-0.229} 0 ${chassis_height+0.092}" rpy="0 0 0"/>
+    <origin xyz="${(chassis_length/2)-0.229} 0 ${chassis_height+0.092}" rpy="0 0 0.04"/>
     <!-- <axis xyz="0 0 1"/> -->
     <!-- <limit effort="1" velocity="1" lower="-1" upper="1" /> -->
     <parent link="base_link"/>

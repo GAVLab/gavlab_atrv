@@ -1,6 +1,6 @@
 <launch>
   <!-- Sick LMS1xx driver -->
-  <node name="LMS151_node" pkg="LMS1xx" type="LMS100" output="screen" required="true">
+  <node name="LMS151_node" pkg="lms1xx" type="LMS1xx_node" output="screen" required="true">
     <param name="host" value="192.168.0.195"/>
     <param name="frame_id" value="/laser_link" />
     <!-- <remap from="scan" to="scan_raw"/> -->

@@ -1,0 +1,26 @@
+<launch>
+  <!-- ATRV and joy -->
+  <include file="$(find gavlab_atrv_launch)/launch/joy.launch"/>
+
+  <!-- Start the laser range finder -->
+  <include file="$(find gavlab_atrv_launch)/launch/sick.xml"/>
+
+  <!-- Start the static transformations -->
+  <include file="$(find gavlab_atrv_launch)/launch/transforms.xml"/>
+
+  <node pkg="gavlab_atrv_2dnav" type="odom_to_tf.py" name="odom_to_tf"/>
+  
+  <!-- Start the node that runs slam -->
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+        <remap from="scan" to="scan_filtered"/>
+        <param name="delta" value="0.025"/>
+        <param name="xmin" value="-10"/>
+        <param name="xmax" value="10"/>
+        <param name="ymin" value="-10"/>
+        <param name="ymax" value="10"/>
+        <param name="temporalUpdate" value="0.1"/>
+    </node>
+
+  <!-- Start the node that opens rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" required="true" output="screen" args="-d $(find gavlab_atrv_launch)/rviz/3Dmap.rviz" />
+</launch>
