@@ -5,18 +5,18 @@
     version: 'master'
 # This is the repo for the general mdc2250 library
 - git:
-    local-name: mdc2250
-    uri: 'https://github.com/GAVLab/mdc2250.git'
+    local-name: roboteq_mc
+    uri: 'git@gitlab.is4s-auburn.com:common/roboteq_mc.git'
     version: 'master'
 # This is the repo that containts the serial library
 - git:
     local-name: serial
-    uri: 'https://github.com/wjwwood/serial.git'
-    version: 'master'
+    uri: 'git@gitlab.is4s-auburn.com:common/serial.git'
+    version: 'v1.2.1'
 # This is the repo that contains the serial listener class used by mdc2250
 - git:
     local-name: serial_utils
-    uri: 'https://github.com/wjwwood/serial_utils.git'
+    uri: 'git@gitlab.is4s-auburn.com:common/serial_utils.git'
     version: 'master'
 # This repo is just a utility for converting joystick messages into cmd_vel's
 - svn:
