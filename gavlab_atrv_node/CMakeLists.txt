@@ -56,6 +56,7 @@ include_directories(
 )
 
 add_executable(${PROJECT_NAME} src/atrv_node.cc)
+add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Install executable
 install(TARGETS ${PROJECT_NAME}
