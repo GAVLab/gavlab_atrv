@@ -26,7 +26,10 @@ using namespace mdc2250;
 
 /***** MDC2250 Class Functions *****/
 
-ATRV::ATRV() {
+ATRV::ATRV() 
+  : front_mc_connected_(false),
+    rear_mc_connected_(false)
+  {
   // Set default callbacks
   this->handle_exc = defaultExceptionCallback;
   this->info = defaultInfoCallback;
@@ -54,19 +57,32 @@ void
 ATRV::connect(std::string port1, std::string port2,
               size_t watchdog, bool echo)
 {
-  // Connect to both motor controllers, parallelize to speed up
+  // Connect to one or both motor controllers, parallelize to speed up
   front_mc_error_ = "";
   rear_mc_error_ = "";
-  boost::thread t1(
+
+  if (!port1.isempty())
+  {
+    boost::thread t1(
     boost::bind(&ATRV::connect_, this, &front_mc_, 1, port1, watchdog, echo));
-  boost::thread t2(
+    t1.join();
+  }
+
+  if (!port2.isempty())
+  {
+    boost::thread t2(
     boost::bind(&ATRV::connect_, this, &rear_mc_, 2, port2, watchdog, echo));
-  t1.join();
-  t2.join();
+    t2.join();
+  }
+  
   if (!front_mc_error_.empty())
     throw(ConnectionFailedException("Front mdc2250: "+front_mc_error_));
+  front_mc_connected_ = true;
+
   if (!rear_mc_error_.empty())
     throw(ConnectionFailedException("Rear mdc2250: "+rear_mc_error_));
+  rear_mc_connected_ = true;
+
   this->connected = true;
 }
 
@@ -76,14 +92,25 @@ ATRV::disconnect() {
   boost::mutex::scoped_lock lock(move_mux);
   front_mc_error_ = std::string("");
   rear_mc_error_ = std::string("");
-  boost::thread t1(boost::bind(&ATRV::disconnect_, this, 1));
-  boost::thread t2(boost::bind(&ATRV::disconnect_, this, 2));
-  t1.join();
-  t2.join();
+
+  if (front_mc_connected_)
+  {
+    boost::thread t1(boost::bind(&ATRV::disconnect_, this, 1));
+    t1.join();
+  }
+  if (rear_mc_connected_)
+  {
+    boost::thread t2(boost::bind(&ATRV::disconnect_, this, 2));
+    t2.join();
+  }
+  
   if (!front_mc_error_.empty())
     throw(ConnectionFailedException("Front mdc2250: "+front_mc_error_));
+  front_mc_connected_ = false;
+
   if (!rear_mc_error_.empty())
     throw(ConnectionFailedException("Rear mdc2250: "+rear_mc_error_));
+  rear_mc_connected_=false;
 }
 
 void
@@ -109,8 +136,14 @@ ATRV::move(double linear_velocity, double angular_velocity) {
   right_wheel_effort_ = (rws / (double)this->max_rpm_) * 1000.0 * 11.0;
 
   // Issue command
-  this->front_mc_.commandMotors(left_wheel_effort_, right_wheel_effort_);
-  this->rear_mc_.commandMotors(left_wheel_effort_, right_wheel_effort_);
+  if (front_mc_connected_)
+  {
+    this->front_mc_.commandMotors(left_wheel_effort_, right_wheel_effort_);    
+  }
+  if (rear_mc_connected_)
+  {
+    this->rear_mc_.commandMotors(left_wheel_effort_, right_wheel_effort_);    
+  }
 }
 
 void

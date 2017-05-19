@@ -163,8 +163,8 @@ private:
   // Functions
   bool getParameters() {
     // Get the serial ports
-    n.param("front_port", this->front_port, std::string("/dev/default"));
-    n.param("rear_port", this->rear_port, std::string("/dev/default"));
+    n.param("front_port", this->front_port, std::string(""));
+    n.param("rear_port", this->rear_port, std::string(""));
 
     // Get Setup Motor Timeout
     n.param("motor_timeout", this->motor_timeout, 0.5);

@@ -36,6 +36,10 @@ add_executable(atrv_example examples/atrv_example.cc)
 add_dependencies(atrv_example ${PROJECT_NAME})
 target_link_libraries(atrv_example ${PROJECT_NAME})
 
+add_executable(atrv_singleMc_example examples/atrv_singleMc_example.cc)
+add_dependencies(atrv_singleMc_example ${PROJECT_NAME})
+target_link_libraries(atrv_singleMc_example ${PROJECT_NAME})
+
 ## Include headers
 include_directories(
     include

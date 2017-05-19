@@ -163,9 +163,9 @@ public:
   /*!
    * Connects to the ATRV motor controller given a serial port.
    * 
-   * \param port1 Defines the port for the first motor controller.
+   * \param port1 Defines the port for the front motor controller.
    * Examples: Linux - "/dev/ttyS0" Windows - "COM1"
-   * \param port2 Defines the port for the second motor controller.
+   * \param port2 Defines the port for the rear motor controller.
    * Examples: Linux - "/dev/ttyS1" Windows - "COM2"
    * \params watchdog size_t time in milliseconds for the watchdog timeout 
    * period.  Defaults to 1000 ms.
@@ -174,7 +174,7 @@ public:
    * 
    * \throws ConnectionFailedException connection attempt failed.
    */
-  void connect(std::string port1, std::string port2,
+  void connect(std::string port1 = "", std::string port2 = "",
                size_t watchdog = 1000, bool echo = true);
 
   /*!
@@ -290,6 +290,11 @@ private:
   mdc2250::MDC2250 front_mc_, rear_mc_;
   // Concurrent connecting variables
   std::string front_mc_error_, rear_mc_error_;
+  
+  // Indicator for connected motor controllers
+  bool front_mc_connected_;
+  bool rear_mc_connected_;
+
   void connect_(mdc2250::MDC2250 *mc, size_t i, const std::string &port,
                 size_t wd, bool echo);
   void disconnect_(size_t mc_index);
