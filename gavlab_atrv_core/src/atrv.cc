@@ -61,14 +61,14 @@ ATRV::connect(std::string port1, std::string port2,
   front_mc_error_ = "";
   rear_mc_error_ = "";
 
-  if (!port1.isempty())
+  if (!port1.empty())
   {
     boost::thread t1(
     boost::bind(&ATRV::connect_, this, &front_mc_, 1, port1, watchdog, echo));
     t1.join();
   }
 
-  if (!port2.isempty())
+  if (!port2.empty())
   {
     boost::thread t2(
     boost::bind(&ATRV::connect_, this, &rear_mc_, 2, port2, watchdog, echo));
