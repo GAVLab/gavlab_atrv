@@ -66,6 +66,10 @@ ATRV::connect(std::string port1, std::string port2,
     boost::thread t1(
     boost::bind(&ATRV::connect_, this, &front_mc_, 1, port1, watchdog, echo));
     t1.join();
+
+  if (!front_mc_error_.empty())
+    throw(ConnectionFailedException("Front mdc2250: "+front_mc_error_));
+  front_mc_connected_ = true;
   }
 
   if (!port2.empty())
@@ -73,15 +77,10 @@ ATRV::connect(std::string port1, std::string port2,
     boost::thread t2(
     boost::bind(&ATRV::connect_, this, &rear_mc_, 2, port2, watchdog, echo));
     t2.join();
+    if (!rear_mc_error_.empty())
+      throw(ConnectionFailedException("Rear mdc2250: "+rear_mc_error_));
+    rear_mc_connected_ = true;
   }
-  
-  if (!front_mc_error_.empty())
-    throw(ConnectionFailedException("Front mdc2250: "+front_mc_error_));
-  front_mc_connected_ = true;
-
-  if (!rear_mc_error_.empty())
-    throw(ConnectionFailedException("Rear mdc2250: "+rear_mc_error_));
-  rear_mc_connected_ = true;
 
   this->connected = true;
 }
@@ -97,20 +96,18 @@ ATRV::disconnect() {
   {
     boost::thread t1(boost::bind(&ATRV::disconnect_, this, 1));
     t1.join();
+    if (!front_mc_error_.empty())
+      throw(ConnectionFailedException("Front mdc2250: "+front_mc_error_));
+    front_mc_connected_ = false;
   }
   if (rear_mc_connected_)
   {
     boost::thread t2(boost::bind(&ATRV::disconnect_, this, 2));
     t2.join();
+    if (!rear_mc_error_.empty())
+      throw(ConnectionFailedException("Rear mdc2250: "+rear_mc_error_));
+    rear_mc_connected_=false;
   }
-  
-  if (!front_mc_error_.empty())
-    throw(ConnectionFailedException("Front mdc2250: "+front_mc_error_));
-  front_mc_connected_ = false;
-
-  if (!rear_mc_error_.empty())
-    throw(ConnectionFailedException("Rear mdc2250: "+rear_mc_error_));
-  rear_mc_connected_=false;
 }
 
 void
