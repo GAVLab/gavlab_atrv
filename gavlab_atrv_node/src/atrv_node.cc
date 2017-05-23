@@ -190,7 +190,7 @@ private:
     if ((query_type != encoder_count_absolute
          && query_type != encoder_count_relative)
       || telemetry.size() != 2) {
-      ROS_WARN("Inavlid encoder callback.");
+      ROS_WARN("Invalid encoder callback.");
       return;
     }
 
