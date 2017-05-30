@@ -38,9 +38,10 @@ ATRV::ATRV() {
   rear_mc_.setExceptionHandler(boost::bind(&ATRV::exc_cb_, this, _1, 1));
 
   // Set vehicle parameters
-  track_width_ = 0.76; // meters
-  wheel_radius_ = 0.203; // meters
-  max_rpm_ = 3000; // rpm
+  track_width_ = 1;//0.76; // meters
+  wheel_radius_ = 0.22; // meters
+  max_rpm_ = 1000; // rpm
+  max_motor_velocity=1.75;
   encoder_ppr_ = 1000; // ppr
 
   this->connected = false;
@@ -102,15 +103,51 @@ ATRV::move(double linear_velocity, double angular_velocity) {
   rws /= 4 * M_PI * this->wheel_radius_;
   rws *= 60; // Minutes to seconds
 
+  /////////////////////////////////////////////////////////////////////////////////////
+//   double l_rpm= ((linear_velocity)+angular_velocity*(track_width_/2))*60/(2*M_PI*wheel_radius_);
+//   double r_rpm= ((linear_velocity)-angular_velocity*(track_width_/2))*60/(2*M_PI*wheel_radius_);
+
+// ////////////////////////////////////////////////////////////////////////////////////////
   // Calculate rpm as an effort represented as a percentage of max_rpm_
   // (lws / max_rpm) * max_effort_value * gear_ratio
+  
+
+  // if (lws > (double)this->max_rpm_){
+  //   lws = (double)this->max_rpm_;
+  // }
+  // if (lws < -(double)this->max_rpm_){
+  //   lws = -(double)this->max_rpm_;
+  // }
+  //   if (rws > (double)this->max_rpm_){
+  //   rws = (double)this->max_rpm_;
+  // }
+  // if (rws < -(double)this->max_rpm_){
+  //   rws = -(double)this->max_rpm_;
+  // }
+
   boost::mutex::scoped_lock lock(move_mux);
   left_wheel_effort_ = (lws / (double)this->max_rpm_) * 1000.0 * 11.0;
-  right_wheel_effort_ = (rws / (double)this->max_rpm_) * 1000.0 * 11.0;
+  right_wheel_effort_ = (rws / (double)this->max_rpm_) * 1000.0 * 11.0;  //1/.466 for pully ratio
+  // left_wheel_effort_ = (((linear_velocity)+angular_velocity*(track_width_/2)) / max_motor_velocity) * 1000.0 * 11.0;
+  // right_wheel_effort_ = (((linear_velocity)-angular_velocity*(track_width_/2)) / max_motor_velocity) * 1000.0 * 11.0;
 
+
+  if (left_wheel_effort_ >= 1000){
+    left_wheel_effort_ = 999;
+  }
+  if (left_wheel_effort_ <= -1000){
+    left_wheel_effort_ = -999;
+  }
+    if (right_wheel_effort_ >= 1000){
+    right_wheel_effort_ = 999;
+  }
+  if (right_wheel_effort_ <= -1000){
+    right_wheel_effort_ = -999;
+  }
+  //std:: cout << "left_wheel_effort_: " << left_wheel_effort_ <<  std::endl;
   // Issue command
   this->front_mc_.commandMotors(left_wheel_effort_, right_wheel_effort_);
-  this->rear_mc_.commandMotors(-left_wheel_effort_, right_wheel_effort_);
+  this->rear_mc_.commandMotors(left_wheel_effort_, right_wheel_effort_);
 }
 
 void
@@ -124,9 +161,9 @@ bool
 ATRV::calculateOdometry(long &encoder1, long &encoder2, double &delta_time,
                         double &x, double &y, double &theta)
 {
-  // Divide the relative encoder counts by 11 for the gear ratio
-  double left_wheel_speed = encoder1 / 11.0f;
-  double right_wheel_speed = encoder2 / 11.0f;
+  // Divide the relative encoder counts by 11 for the gear ratio  and .466 for the pully ratio
+  double left_wheel_speed = (encoder1 / 11.0f);
+  double right_wheel_speed = (encoder2 / 11.0f);
   // Calculate the wheel speed from the delta_time
   left_wheel_speed /= delta_time;
   right_wheel_speed /= delta_time;

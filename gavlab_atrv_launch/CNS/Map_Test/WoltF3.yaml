@@ -1,0 +1,7 @@
+image: WoltF3.pgm
+resolution: 0.020000
+origin: [-63.760000, -63.760000, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

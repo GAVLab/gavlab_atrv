@@ -21,7 +21,8 @@ catkin_package(
 
 ## Sources
 set(gavlab_atrv_core_SRCS
-    src/atrv.cc
+    # src/atrv.cc
+    src/atrv_corrected.cc
     include/atrv/atrv.h
 )
 

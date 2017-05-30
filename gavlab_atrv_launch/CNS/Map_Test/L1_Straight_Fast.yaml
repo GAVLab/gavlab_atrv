@@ -1,0 +1,7 @@
+image: L1_Straight_Fast.pgm
+resolution: 0.025000
+origin: [-31.600000, -53.200000, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

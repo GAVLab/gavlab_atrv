@@ -1,0 +1,58 @@
+<!-- 2D Navigation Initialization -->
+
+<launch>
+
+  <!-- Launch octomap_server -->
+  <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+    <param name="resolution" value="0.05" />
+    <param name="frame_id" type="string" value="map" />
+    <param name="max_sensor_range" value="5.0" />
+    <param name="latch" value="false" />
+    <param name="pointcloud_min_z" value="0.2" />
+    <param name="pointcloud_max_z" value="2.0" />
+    <remap from="cloud_in" to="/asus/map_synced_points" />
+  </node>
+
+  <!-- Start the Asus Xtion -->
+  <include file="$(find gavlab_atrv_launch)/launch/asus.launch"/>
+
+  <!-- Sync Asus Xtion Point Cloud with Map -->
+  <node pkg="gavlab_atrv_launch" type="point_cloud_sync.py" name="point_cloud_sync"/>
+
+
+  <!-- Start the Sick LMS 151 LiDAR -->
+  <include file="$(find gavlab_atrv_launch)/launch/sick.xml"/>
+
+  <!-- Start the Static Transformations -->
+  <include file="$(find gavlab_atrv_launch)/launch/transforms.xml"/>
+
+  <!-- Start the Crossbow 440 -->
+  <!-- <include file="$(find gavlab_atrv_launch)/launch/xbow440.xml"/> -->
+
+  <!-- Send Odom msgs to tf -->
+  <node pkg="gavlab_atrv_2dnav" type="odom_to_tf.py" name="odom_to_tf"/>
+
+  <!-- Launch map_server -->
+  <node pkg="map_server" type="map_server" name="map_server" args="$(find gavlab_atrv_launch)/CNS/Map_Test/WoltF3.yaml"/>
+
+  <!-- Run gavlab_atrv_launch -->
+  <include file="$(find gavlab_atrv_launch)/CNS/CNS_amcl.launch" />
+
+  <!-- Run Gmapping (Navigation Test)-->
+  <!-- <include file="$(find gavlab_atrv_launch)/CNS/Michael_Gmapping.launch" /> -->
+  
+
+  <!-- <include file="$(find gavlab_atrv_2dnav)/launch/move_base.launch"/> -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+  	<rosparam file="$(find gavlab_atrv_launch)/navigation_configs2/costmap_common_params.yaml" command="load" ns="global_costmap" />
+  	<rosparam file="$(find gavlab_atrv_launch)/navigation_configs2/costmap_common_params.yaml" command="load" ns="local_costmap" />
+  	<rosparam file="$(find gavlab_atrv_launch)/navigation_configs2/local_costmap_params.yaml" command="load" />
+  	<rosparam file="$(find gavlab_atrv_launch)/navigation_configs2/global_costmap_params.yaml" command="load" />
+  	<rosparam file="$(find gavlab_atrv_launch)/navigation_configs2/base_local_planner_params.yaml" command="load" />
+  	<remap from="cmd_vel" to="atrv_node/cmd_vel"/>
+  </node> 
+
+  <!-- Launch rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" required="true" output="screen" args="-d $(find gavlab_atrv_launch)/CNS/Michael.rviz" />
+
+</launch>  

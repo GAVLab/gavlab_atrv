@@ -1,0 +1,19 @@
+
+<!-- Teleop Controller -->
+
+<launch>
+	<!-- Start the joy stick interface node -->
+  <node pkg="joy" type="joy_node" name="joy_node" output="screen" 
+        required="true">
+    <param name="autorepeat_rate" value="5" type="double" />
+  </node>
+
+  <!-- Start the node that converts joy messages to cmd_vel's -->
+  <node pkg="joy_to_twist" type="Michael_Joy2Twist.py" name="atrv_joy_to_twist"
+        output="screen" required="true">
+    <param name="max_linear_vel" type="double" value="0.5" />
+    <param name="max_angular_vel" type="double" value="0.5" />
+    <param name="tolerance" type="double" value="0.125" />
+    <remap from="cmd_vel" to="atrv_node/cmd_vel" />
+  </node>
+</launch>

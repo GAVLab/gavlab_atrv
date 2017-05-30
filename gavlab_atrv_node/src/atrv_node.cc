@@ -190,7 +190,7 @@ private:
     if ((query_type != encoder_count_absolute
          && query_type != encoder_count_relative)
       || telemetry.size() != 2) {
-      ROS_WARN("Inavlid encoder callback.");
+      ROS_WARN("Invalid encoder callback.");
       return;
     }
 
@@ -200,12 +200,16 @@ private:
       this->front_encoder_msg.left = telemetry[0];
       this->front_encoder_msg.right = telemetry[1];
       this->front_encoder_pub.publish(this->front_encoder_msg);
+      // Debug 
     } else if (motor_index == 2) {
       this->rear_encoder_msg.header.stamp = now;
       this->rear_encoder_msg.left = telemetry[0];
       this->rear_encoder_msg.right = telemetry[1];
       this->rear_encoder_pub.publish(this->rear_encoder_msg);
+      // printf("motor_index = %d, enc_left = %d, enc_right = %d\n", (int)motor_index, (int)telemetry[0], (int)telemetry[1]);
+
     }
+
 
     // Only use the front motors for odometry
     if (motor_index == 2) {
@@ -219,18 +223,25 @@ private:
     double previous_y = this->odometry_y;
     double previous_theta = this->odometry_theta;
     // How long has it been?
-    // double delta_t = 1.0/50.0;
+    double delta_t = 1.0/50.0;
     double delta_time = (now-this->last_time_).toSec();
+
+    // std::stringstream dt_msg;
+    // dt_msg << "delta_time: " << delta_time;
+    // ROS_INFO(dt_msg.str());
+
+    // std::cout << "delta time: " << delta_time << std::endl;
+
     if (!this->first_odometry) {
       // Calculate change in encoders
       long delta_lwc = telemetry[0] - this->lwc_;
       long delta_rwc = telemetry[1] - this->rwc_;
       // Update positions
-      this->atrv_->calculateOdometry(delta_lwc, delta_rwc, delta_time,
+      this->atrv_->calculateOdometry(delta_lwc, delta_rwc, delta_t,  
                                      this->odometry_x, this->odometry_y,
                                      this->odometry_theta);
     }
-
+    //std::cout << "yaw: " <<this->odometry_theta << " rad" <<std::endl;
     // Update the Odometry Msg
     this->odom_msg.header.stamp = now;
     this->odom_msg.header.frame_id = "odom";
@@ -240,12 +251,12 @@ private:
     this->odom_msg.pose.pose.orientation =
       tf::createQuaternionMsgFromYaw(this->odometry_theta);
     this->odom_msg.twist.twist.linear.x =
-      (this->odometry_x - previous_x)/delta_time;
+      (this->odometry_x - previous_x)/delta_t;
     this->odom_msg.twist.twist.linear.y =
-      (this->odometry_y - previous_y)/delta_time;
+      (this->odometry_y - previous_y)/delta_t;
     this->odom_msg.twist.twist.linear.z = 0.0f;
     this->odom_msg.twist.twist.angular.z =
-      (this->odometry_theta - previous_theta)/delta_time;
+      (this->odometry_theta - previous_theta)/delta_t;
     // Publish the odometry msg
     this->odom_pub.publish(this->odom_msg);
 

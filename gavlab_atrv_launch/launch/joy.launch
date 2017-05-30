@@ -1,9 +1,9 @@
 <launch>
   <!-- Arguments -->
-  <arg name="front_port" default="/dev/atrv_front_wheels_usb" />
-  <arg name="rear_port" default="/dev/atrv_rear_wheels_usb" />
-  <!-- <arg name="front_port" default="/dev/atrv_front_wheels" /> -->
-  <!-- <arg name="rear_port" default="/dev/atrv_rear_wheels" /> -->
+  <!-- <arg name="front_port" default="/dev/atrv_front_wheels_usb" /> -->
+  <!-- <arg name="rear_port" default="/dev/atrv_rear_wheels_usb" /> -->
+  <arg name="front_port" default="/dev/atrv_front_wheels" />
+  <arg name="rear_port" default="/dev/atrv_rear_wheels" />
   <!-- <arg name="front_port" default="/dev/ttyACM1" /> -->
   <!-- <arg name="rear_port" default="/dev/ttyACM0" /> -->
 
@@ -23,8 +23,8 @@
   <!-- Start the node that converts joy messages to cmd_vel's -->
   <node pkg="joy_to_twist" type="joy_to_twist.py" name="atrv_joy_to_twist"
         output="screen" required="true">
-    <param name="max_linear_vel" type="double" value="1.5" />
-    <param name="max_angular_vel" type="double" value="1.5" />
+    <param name="max_linear_vel" type="double" value=".75" />
+    <param name="max_angular_vel" type="double" value=".75" />
     <remap from="cmd_vel" to="atrv_node/cmd_vel" />
   </node>
 </launch>

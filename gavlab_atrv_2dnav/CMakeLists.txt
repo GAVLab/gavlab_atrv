@@ -4,6 +4,7 @@ project(gavlab_atrv_2dnav)
 find_package(catkin REQUIRED COMPONENTS
   rospy
   tf
+  tf2_ros
   move_base
   nav_msgs
   sensor_msgs
@@ -13,6 +14,7 @@ catkin_package(
     CATKIN_DEPENDS 
       rospy
 	  tf
+    tf2_ros
 	  move_base
 	  nav_msgs
 	  sensor_msgs
@@ -28,5 +30,6 @@ include_directories(
 install(PROGRAMS
   scripts/laser_filter.py
   scripts/odom_to_tf.py
+  scripts/odom_to_tf2.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

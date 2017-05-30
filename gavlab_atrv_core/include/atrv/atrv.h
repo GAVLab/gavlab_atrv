@@ -306,9 +306,9 @@ private:
   ssize_t left_wheel_effort_, right_wheel_effort_;
 
   // Vehicle geometry
-  double track_width_, wheel_radius_;
+  double track_width_, wheel_radius_, lwheel_radius, rwheel_radius, reduction_ratio, left_wheel_circumference, right_wheel_circumference;
   size_t max_rpm_, encoder_ppr_;
-
+  double max_motor_velocity;
   // Move thread safety
   bool connected;
   boost::mutex move_mux;

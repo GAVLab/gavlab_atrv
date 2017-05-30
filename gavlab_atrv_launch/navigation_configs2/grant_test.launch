@@ -1,0 +1,72 @@
+<launch>
+
+  <!-- Arguments -->
+  <arg name="front_port" default="/dev/atrv_front_wheels" />
+  <arg name="rear_port" default="/dev/atrv_rear_wheels" />
+
+
+  <!-- Start the node that interfaces with the motor controllers -->
+  <node pkg="gavlab_atrv_node" type="gavlab_atrv_node" name="atrv_node"
+        output="screen" required="true">
+    <param name="front_port" value="$(arg front_port)" />
+    <param name="rear_port" value="$(arg rear_port)" />
+  </node>
+
+ <!-- launch octomap -->
+  <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+    <param name="resolution" value="0.05" />
+    <param name="frame_id" type="string" value="map" />
+    <param name="max_sensor_range" value="5.0" />
+    <param name="latch" value="false" />
+    <param name="pointcloud_min_z" value=".2" />
+    <param name="pointcloud_max_z" value="2.0" />
+    <remap from="cloud_in" to="/asus/map_synced_points" />
+
+
+  </node>
+
+    <!-- Start the asus -->
+  <include file="$(find gavlab_atrv_launch)/launch/asus.launch"/>
+
+   <!-- Sync asus point cloud with map -->
+  <node pkg="gavlab_atrv_launch" type="point_cloud_sync.py" name="point_cloud_sync"/>
+
+
+
+  <!-- Start the laser range finder -->
+  <include file="$(find gavlab_atrv_launch)/launch/sick.xml"/>
+
+  <!-- Start the static transformations -->
+  <include file="$(find gavlab_atrv_launch)/launch/transforms.xml"/>
+
+  <node pkg="gavlab_atrv_2dnav" type="odom_to_tf.py" name="odom_to_tf"/>
+
+
+
+
+
+
+  <!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find amcl)/maps/RFID_Stock.yaml"/>
+
+  <!--- Run AMCL -->
+  <include file="$(find amcl)/navigation_configs2/small_loop_crazy_driving_prg_corrected.xml" />
+  
+
+<!-- <include file="$(find gavlab_atrv_2dnav)/launch/move_base.launch"/> -->
+   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <rosparam file="$(find amcl)/navigation_configs2/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find amcl)/navigation_configs2/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find amcl)/navigation_configs2/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find amcl)/navigation_configs2/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find amcl)/navigation_configs2/base_local_planner_params.yaml" command="load" />
+        <remap from="cmd_vel" to="atrv_node/cmd_vel"/>
+    </node> 
+
+  <!-- Start the node that opens rviz -->
+  <!-- <node name="rviz" pkg="rviz" type="rviz" required="true" output="screen" args="-d $(find amcl)/navigation.rviz" /> -->
+
+<node name="rviz" pkg="rviz" type="rviz" required="true" output="screen" args="-d $(find amcl)/grant.rviz" />
+
+
+</launch> 
