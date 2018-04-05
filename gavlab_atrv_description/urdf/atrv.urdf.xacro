@@ -40,7 +40,7 @@
   <!-- base_footprint -->
   <!-- The frame of the floor directly below the base_link and -->
   <!-- is needed for the navigation stack to work properly -->
-  <link name="base_footprint"></link>
+  <link name="base_footprint"/>  <!-- </link> -->
 
   <!-- base_link -->
   <!-- The link that is the origin of all of the components of the -->
@@ -66,7 +66,8 @@
 
   <!-- base_footprint -> base_link -->
   <joint name="base_footprint_joint" type="fixed">
-      <origin xyz="0 0 ${ground_clearance}" rpy="0 0 0"/>
+      <!-- <origin xyz="0 0 ${ground_clearance}" rpy="0 0 0"/> -->
+      <origin xyz="-0.23495 0 ${ground_clearance}" rpy="0 0 0"/>
       <parent link="base_footprint"/>
       <child link="base_link"/>
   </joint>

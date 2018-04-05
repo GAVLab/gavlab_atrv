@@ -1,0 +1,47 @@
+TrajectoryPlannerROS:
+
+  # Set the acceleration limits for the robot
+  acc_lim_x: 0.1
+  acc_lim_y: 0.0
+  acc_lim_theta: .2
+
+  # Set the velocity limits for the robot
+  max_vel_x: 0.5
+  min_vel_x: -0.5
+  max_vel_theta: 0.5
+  min_vel_theta: -0.5
+  min_in_place_vel_theta: 0.01
+  escape_vel: -0.1
+  holonomic_robot: false
+  #y_vels: Only use if holonomic robot is true
+
+  # Goal tolerance parameters
+  yaw_goal_tolerance: 0.05
+  xy_goal_tolerance: 0.02
+  latch_xy_goal_tolerance: false
+
+  # Forward simulation parameters
+  sim_time: 4.0
+  sim_granularity: 0.5
+  #angular_sim_granularity: 0.5
+  vx_samples: 3
+  vtheta_samples: 20
+  controller_frequency: 20
+
+  # Trajectory scoring parameters
+  meter_scoring: true
+  pdist_scale: 0.9
+  gdist_scale: 0.3
+  occdist_scale: 0.1
+  heading_lookahead: 1.0
+  heading_scoring: false
+  heading_scoring_timestep: 0.2
+  dwa: true
+  publish_cost_grid_pc: true
+  #global_frame_id: /odom
+
+  # Oscillation Prevention Parameters
+  oscillation_reset_dist: 0.05
+
+  # Global Plan Parameters
+  prune_plan: true

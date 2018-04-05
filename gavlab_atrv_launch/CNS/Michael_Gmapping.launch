@@ -1,18 +1,18 @@
 <launch>
   <!-- ATRV and joy -->
-  <!-- <include file="$(find amcl)CNS/ATRV_Init.launch"/>
-  <include file="$(find amcl)CNS/Michael_Joy.launch"/>
- -->
+  <include file="$(find gavlab_atrv_launch)CNS/ATRV_Init.launch"/>
+  <include file="$(find gavlab_atrv_launch)CNS/Michael_Joy.launch"/>
+
   <!-- Start the laser range finder -->
-  <!-- <include file="$(find gavlab_atrv_launch)/launch/sick.xml"/> -->
+  <include file="$(find gavlab_atrv_launch)/launch/sick.xml"/>
 
   <!-- Start the static transformations -->
-  <!-- <include file="$(find gavlab_atrv_launch)/launch/transforms.xml"/>
+  <include file="$(find gavlab_atrv_launch)/launch/transforms.xml"/>
 
-  <node pkg="gavlab_atrv_2dnav" type="odom_to_tf.py" name="odom_to_tf"/> -->
+  <node pkg="gavlab_atrv_2dnav" type="odom_to_tf.py" name="odom_to_tf"/>
   
   <!-- Start the node that runs slam (Parameters)-->
-<!--   <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+  <!--   <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
     <remap from="scan" to="scan_filtered"/>
 
     <param name="throttle_scans" value="1.0"/>
@@ -69,7 +69,7 @@
     <param name="map_frame" value="map"/>
     <param name="odom_frame" value="odom"/>
     <param name="map_update_interval" value="1.0"/>
-    <param name="maxUrange" value="10"/>
+    <param name="maxUrange" value="20"/>
     <param name="lskip" value="0"/>
     <param name="particles" value="30"/>
     <param name="delta" value="0.02"/>
@@ -78,7 +78,7 @@
   </node>
 
   <!-- Start the node that opens rviz -->
-  <!-- <node name="rviz" pkg="rviz" type="rviz" required="true" output="screen" args="-d $(find amcl)/CNS/Michael.rviz" /> -->
+  <node name="rviz" pkg="rviz" type="rviz" required="true" output="screen" args="-d $(find gavlab_atrv_launch)/CNS/Michael.rviz" />
 
 </launch>
 

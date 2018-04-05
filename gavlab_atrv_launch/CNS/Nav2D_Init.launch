@@ -1,9 +1,12 @@
 <!-- 2D Navigation Initialization -->
 
 <launch>
+  
+  <!-- Launch ATRV Initialization -->
+  <include file="$(find gavlab_atrv_launch)CNS/ATRV_Init.launch"/>
 
   <!-- Launch octomap_server -->
-  <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+   <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
     <param name="resolution" value="0.05" />
     <param name="frame_id" type="string" value="map" />
     <param name="max_sensor_range" value="5.0" />
@@ -26,29 +29,28 @@
   <!-- Start the Static Transformations -->
   <include file="$(find gavlab_atrv_launch)/launch/transforms.xml"/>
 
-  <!-- Start the Crossbow 440 -->
+  <!-- Start the Crossbow 440 (Not Connected) -->
   <!-- <include file="$(find gavlab_atrv_launch)/launch/xbow440.xml"/> -->
 
   <!-- Send Odom msgs to tf -->
   <node pkg="gavlab_atrv_2dnav" type="odom_to_tf.py" name="odom_to_tf"/>
 
   <!-- Launch map_server -->
-  <node pkg="map_server" type="map_server" name="map_server" args="$(find gavlab_atrv_launch)/CNS/Map_Test/WoltF3.yaml"/>
+  <node pkg="map_server" type="map_server" name="map_server" args="$(find gavlab_atrv_launch)/CNS/Warehouse_bag/trial_1.yaml"/>
 
-  <!-- Run gavlab_atrv_launch -->
-  <include file="$(find gavlab_atrv_launch)/CNS/CNS_amcl.launch" />
+  <!-- Run Localization -->
+  <include file="$(find gavlab_atrv_launch)/CNS_nav_configs/amcl_CNS.launch" />
 
   <!-- Run Gmapping (Navigation Test)-->
   <!-- <include file="$(find gavlab_atrv_launch)/CNS/Michael_Gmapping.launch" /> -->
   
-
-  <!-- <include file="$(find gavlab_atrv_2dnav)/launch/move_base.launch"/> -->
+  <!-- Run move_base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-  	<rosparam file="$(find gavlab_atrv_launch)/navigation_configs2/costmap_common_params.yaml" command="load" ns="global_costmap" />
-  	<rosparam file="$(find gavlab_atrv_launch)/navigation_configs2/costmap_common_params.yaml" command="load" ns="local_costmap" />
-  	<rosparam file="$(find gavlab_atrv_launch)/navigation_configs2/local_costmap_params.yaml" command="load" />
-  	<rosparam file="$(find gavlab_atrv_launch)/navigation_configs2/global_costmap_params.yaml" command="load" />
-  	<rosparam file="$(find gavlab_atrv_launch)/navigation_configs2/base_local_planner_params.yaml" command="load" />
+  	<rosparam file="$(find gavlab_atrv_launch)/CNS_nav_configs/costmap_common_params_CNS.yaml" command="load" ns="global_costmap" />
+  	<rosparam file="$(find gavlab_atrv_launch)/CNS_nav_configs/costmap_common_params_CNS.yaml" command="load" ns="local_costmap" />
+  	<rosparam file="$(find gavlab_atrv_launch)/CNS_nav_configs/local_costmap_params_CNS.yaml" command="load" />
+  	<rosparam file="$(find gavlab_atrv_launch)/CNS_nav_configs/global_costmap_params_CNS.yaml" command="load" />
+  	<rosparam file="$(find gavlab_atrv_launch)/CNS_nav_configs/base_local_planner_params_CNS.yaml" command="load" />
   	<remap from="cmd_vel" to="atrv_node/cmd_vel"/>
   </node> 
 

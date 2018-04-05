@@ -2,6 +2,7 @@ obstacle_range: 10.0
 raytrace_range: 15.0
 # footprint: [[-0.51, 0.42], [0.51, 0.42],[0.51, -0.42], [-0.50, -0.42]]
 footprint: [[-1.05, 0.42], [0.35, 0.42],[0.35, -0.42], [-1.05, -0.42]]
+# robot_radius: 
 inflation_radius: 0.3
 
 transform_tolerance: 0.2 # Max running just hardware nodes is ~0.0006 secs according to tf_monitor

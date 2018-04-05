@@ -37,16 +37,27 @@ ATRV::ATRV() {
   rear_mc_.setInfoHandler(boost::bind(&ATRV::info_cb_, this, _1, 2));
   rear_mc_.setExceptionHandler(boost::bind(&ATRV::exc_cb_, this, _1, 1));
 
-  // Set vehicle parameters
-  track_width_ = 0.9985; // meters // 0.80321912 says geometry
-  lwheel_radius = 0.1946275; // meters // will change periodically
-  rwheel_radius = 0.19025; // meters // will change periodically
+  // // Set vehicle parameters
+  // track_width_ = 0.9985; // meters // 0.80321912 says geometry
+  // lwheel_radius = 0.1946275; // meters // will change periodically
+  // rwheel_radius = 0.19025; // meters // will change periodically
+  // max_rpm_ = 1000; // rpm 
+  // max_motor_velocity = 1.75; 
+  // reduction_ratio = 0.5f/11.0f;
+  // encoder_ppr_ = 2000; // ppr 
+  // left_wheel_circumference = lwheel_radius * 2.0f * M_PI; 
+  // right_wheel_circumference = rwheel_radius * 2.0f * M_PI; 
+
+  // Set Caster Wheel Parameters
+  track_width_ = 0.6731; // meters
+  lwheel_radius = 0.20; // meters // will change periodically
+  rwheel_radius = 0.20; // meters // will change periodically
   max_rpm_ = 1000; // rpm 
   max_motor_velocity = 1.75; 
   reduction_ratio = 0.5f/11.0f;
   encoder_ppr_ = 2000; // ppr 
   left_wheel_circumference = lwheel_radius * 2.0f * M_PI; 
-  right_wheel_circumference = rwheel_radius * 2.0f * M_PI; 
+  right_wheel_circumference = rwheel_radius * 2.0f * M_PI;
 
   this->connected = false;
 }
@@ -165,14 +176,6 @@ bool
 ATRV::calculateOdometry(long &encoder1, long &encoder2, double &delta_time,
                         double &x, double &y, double &theta)
 {
-
-  // // Calculate wheel revolutions per unit time
-  // double left_wheel_speed = ((double)encoder1/((double)(this->encoder_ppr_) / (double)(this->reduction_ratio)))/delta_time;
-  // double right_wheel_speed = ((double)encoder2/((double)(this->encoder_ppr_) / (double)(this->reduction_ratio)))/delta_time;
-
-  // // Convert wheel revolutions to meters
-  // left_wheel_speed *= this->lwheel_radius*2.0f*M_PI;
-  // right_wheel_speed *= this->rwheel_radius*2.0f*M_PI;
   
   // Calculate Individual Wheel Speed in m/s
   double left_wheel_speed = ((double)encoder1/(double)(this->encoder_ppr_))*((double)(this->reduction_ratio)/delta_time)*(this->lwheel_radius*2.0f*M_PI);
